@@ -46,7 +46,7 @@ namespace fujiiYuma{
             //衝突したオブジェクトのLayerを確認
             if (collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                Debug.Log("PlayerがEnemyと衝突しました");
+                Debug.Log("PlayerがEnemyと衝突しました。");
             }
         }
     }
