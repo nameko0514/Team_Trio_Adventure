@@ -48,6 +48,7 @@ namespace fujiiYuma
             }
 
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
+            Debug.Log(player);
 
             //player‚ªİ’è‚³‚ê‚Ä‚¢‚È‚¢‚Æ‚«‚Í‚È‚É‚à‚µ‚È‚¢
             if (player == null) return;
