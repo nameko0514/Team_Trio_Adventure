@@ -1,7 +1,8 @@
+using fujiiYuma;
 using UnityEngine;
 
 namespace Gishi {
-    public class GoburnContolor : PlayerController
+    public class GoburnContolor : MonoBehaviour
     {
         private Transform player;
 
@@ -14,31 +15,30 @@ namespace Gishi {
         public int Damage = 10;              // 攻撃力
 
         private float lastAttackTime = 0f;         // 最後に攻撃した時間
-        protected override void Update()
+        private void Update()
         {
-            base.Update();
             if (player == null) return;
 
-            //float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-            //if (distanceToPlayer > attackRange)
-            //{
-            //    //Vector2 direction = (player.position - transform.position).normalized;
-            //    //transform.position += (Vector3)direction * Speed * Time.deltaTime;
-            //}
+            if (distanceToPlayer > attackRange)
+            {
+                Vector2 direction = (player.position - transform.position).normalized;
+                transform.position += (Vector3)direction * Speed * Time.deltaTime;
+            }
 
-            //else if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldowntime)
-            //{
-            //    Attack();
-            //    lastAttackTime = Time.time;
-            //}
+            else if (distanceToPlayer <= attackRange && Time.time >= lastAttackTime + attackCooldowntime)
+            {
+                Attack();
+                lastAttackTime = Time.time;
+            }
         }
 
         void Attack()
         {
             if (player != null)
             {
-                //player.GetComponent<>().TakeDamage(Damage);
+                //player.GetComponent<PlayerController>(Takk).;
                 Debug.Log("プレイヤーに攻撃！ ダメージ: " + Damage);
             }
         }
