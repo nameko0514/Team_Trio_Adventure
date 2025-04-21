@@ -28,7 +28,7 @@ namespace fujiiYuma{
             health = initialHealth;
         }
 
-        private void Update()
+        protected virtual void Update()
         {
             moveInput.x = Input.GetAxis("Horizontal"); //¶‰E‚Ì“ü—Í
             moveInput.y = Input.GetAxis("Vertical"); //ã‰º‚Ì“ü—Í
