@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace fujiiYuma{
@@ -18,6 +19,14 @@ namespace fujiiYuma{
 
         private Vector2 moveInput; //移動入力を格納する変数
 
+        private bool isInvicible = false; //ダメージを受けてしばらくの間はダメージが通らないようにする変数
+
+        private SpriteRenderer spriteRenderer;
+
+        private Color originalColor;
+
+        private Color flashColor = new Color(1f, 0.5f, 0.5f, 0.4f);  //フラッシュするための変数
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
@@ -26,6 +35,10 @@ namespace fujiiYuma{
         protected virtual void Start()
         {
             health = initialHealth;
+
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+            originalColor = spriteRenderer.color;
         }
 
         protected virtual void Update()
@@ -48,6 +61,41 @@ namespace fujiiYuma{
             {
                 Debug.Log("PlayerがEnemyと衝突しました。");
             }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if (isInvicible) { return; }
+
+            health = Mathf.Max(health - damage, 0);
+
+            StartCoroutine(FlashCoroutine());
+
+            if (health < 1)
+            {
+                //体力(ハート)がなくなった時の処理
+            }
+        }
+
+        private IEnumerator FlashCoroutine(float flashDuration = 1f)
+        {
+            isInvicible = true;
+
+            float elapsedTime = 0f;  //経過時間
+            float flashInterval = 0.02f;  //フラッシュする間隔
+
+            while (elapsedTime < flashDuration)
+            {
+                //色を切り替え
+                spriteRenderer.color = (spriteRenderer.color == originalColor) ? flashColor : originalColor;
+
+                yield return new WaitForSeconds(flashInterval);
+
+                elapsedTime += flashInterval;
+            }
+
+            spriteRenderer.color = originalColor;
+            isInvicible = false;
         }
     }
 }
