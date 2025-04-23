@@ -71,9 +71,11 @@ namespace fujiiYuma{
 
             StartCoroutine(FlashCoroutine());
 
-            if (health < 1)
+            if (health == 0)
             {
                 //‘Ì—Í(ƒn[ƒg)‚ª‚È‚­‚È‚Á‚½Žž‚Ìˆ—
+
+                Destroy(gameObject);
             }
         }
 

@@ -6,6 +6,7 @@ public class SwitchPlayer : MonoBehaviour
     public GameObject[] players;
     private int currentPlayerIndex = 0; // 現在アクティブなプレイヤーのインデックス
 
+
     // 長押し検出用の変数
     private float pressStartTime; // キーを押し始めた時間
     private float holdThreshold = 1f; // 長押しとみなす時間（秒）
@@ -16,19 +17,35 @@ public class SwitchPlayer : MonoBehaviour
     // 前のプレイヤーのポジションを取得するための変数
     private Vector2 playerPos;
 
+    private Vector2 playerSwitchPos;
+
+    public bool isTrigger { get; private set; } = false;
+
     void Start()
     {
         // 初期化: 最初のプレイヤーだけアクティブにし、残りは非アクティブ
         for (int i = 0; i < players.Length; i++)
         {
-            players[i].SetActive(i == currentPlayerIndex);
+            if (players[i] != null)
+            {
+                players[i].SetActive(i == currentPlayerIndex);
+            }
         }
 
         playerPos = Vector2.zero;
     }
 
     void Update()
-    {
+    {      
+        if(players[currentPlayerIndex] == null)
+        {
+            DeathSwitchPlayers();
+        }
+        else
+        {
+            playerSwitchPos = players[currentPlayerIndex].transform.position;
+        }
+
         // Enterキーの入力処理
         if (Input.GetKeyDown(KeyCode.Space)) // キーを押した瞬間
         {
@@ -76,6 +93,12 @@ public class SwitchPlayer : MonoBehaviour
         // 次のプレイヤーのインデックスを計算
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
 
+        // 次のプレイヤーが死んでいたらその次のプレイヤーに切り替える
+        while (players[currentPlayerIndex] == null)
+        {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
+        }
+
         // 次のプレイヤーのポジション取を前のプレイヤーのポジションに移動
         players[currentPlayerIndex].transform.position = playerPos;
 
@@ -85,9 +108,36 @@ public class SwitchPlayer : MonoBehaviour
         Debug.Log($"Switched to Player {currentPlayerIndex + 1}");
     }
 
+    private void DeathSwitchPlayers()
+    {
+        // 現在のプレイヤーのポジション取得
+        playerPos = playerSwitchPos;
+
+        // 次のプレイヤーのインデックスを計算
+        currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
+
+        // 次のプレイヤーが死んでいたらその次のプレイヤーに切り替える
+        while (players[currentPlayerIndex] == null)
+        {
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.Length;
+        }
+
+        // 次のプレイヤーのポジション取を前のプレイヤーのポジションに移動
+        players[currentPlayerIndex].transform.position = playerPos;
+
+        // 次のプレイヤーをアクティブに
+        players[currentPlayerIndex].SetActive(true);
+    }
+
     // 単押し時のアクション
     void PerformSinglePressAction()
     {
+        isTrigger = true;
         Debug.Log($"Player {currentPlayerIndex + 1} jumped!");
+    }
+
+    public void ResetTrigger()
+    {
+        isTrigger = false;
     }
 }

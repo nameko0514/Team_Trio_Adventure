@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 namespace fujiiYuma
 {
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(CircleCollider2D))]
     public class GhostScript : MonoBehaviour
     {
         [Header("----í«îˆÇÃë¨ìx----")]
@@ -25,7 +27,14 @@ namespace fujiiYuma
         private float time = 0f;
 
         private bool isChangeFlag = false;
-  
+
+        private CircleCollider2D circleCollider;
+
+        private void Awake()
+        {
+            circleCollider = GetComponent<CircleCollider2D>();
+        }
+
         private void Update()
         {
             time += Time.deltaTime;
@@ -48,7 +57,7 @@ namespace fujiiYuma
             }
 
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
-            Debug.Log(player);
+            //Debug.Log(player);
 
             //playerÇ™ê›íËÇ≥ÇÍÇƒÇ¢Ç»Ç¢Ç∆Ç´ÇÕÇ»Ç…Ç‡ÇµÇ»Ç¢
             if (player == null) return;
@@ -62,7 +71,6 @@ namespace fujiiYuma
                 //åªç›ÇÃà íuÇ©ÇÁPlayerÇÃà íuÇ…å¸Ç©Ç¡ÇƒLerpÇ≈à⁄ìÆ
                 transform.position = Vector2.Lerp(transform.position, player.position, moveSpeed * Time.deltaTime);
             }
-
         }
 
         private IEnumerator SwitchColor(float startAlpha, float endAlpha, float duration, Action onComplete)
@@ -79,9 +87,30 @@ namespace fujiiYuma
             }
 
             color.a = endAlpha;
-            gameObject.GetComponent<Renderer>().material.color = color;           
+            gameObject.GetComponent<Renderer>().material.color = color; 
+            
+            if(endAlpha == 0)
+            {
+                circleCollider.enabled = false;
+            }
+            else
+            {
+                circleCollider.enabled = true;
+            }
 
             onComplete?.Invoke();
+        }
+
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                if (other.TryGetComponent<PlayerController>(out var player))
+                {
+                    const int LethalDamage = 1; 
+                    player.TakeDamage(LethalDamage);
+                }
+            }
         }
     }
 }
