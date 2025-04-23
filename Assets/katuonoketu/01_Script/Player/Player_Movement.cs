@@ -5,7 +5,6 @@ namespace Takato
 {
     public class Player_Movement : PlayerController
     {
-
         protected override void Start()
         {
             base.Start();  //ベースクラスの初期化呼び出し

@@ -6,10 +6,10 @@ namespace Takato
     {
         private SwitchPlayer switchPlayer;
 
-        [Header("好きなスキルのGameObject入れてね！")]
+        [Header("---好きなスキルのGameObject入れてね！---")]
         [SerializeField] private GameObject skillEffectPrefab;
 
-        [Header("FirePointをいれてね！(空のGameObject)")]
+        [Header("---FirePointをいれてね！(空のGameObject)---")]
         [SerializeField] private Transform firePoint;
 
         void Start()
