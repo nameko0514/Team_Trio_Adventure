@@ -17,7 +17,7 @@ namespace Gishi {
 
 
         [Header("----ゴブリンの体力----")]
-        [SerializeField] private int maxHealth = 5;
+        [SerializeField] private int maxHealth = 2;
 
         private int currentHealth;            // 現在の体力
         private float lastAttackTime = 0f;    // 最後に攻撃した時間
@@ -53,7 +53,7 @@ namespace Gishi {
         {
             if (player != null)
             {
-                fujiiYuma.SwitchPlayer playerController = player.GetComponent<fujiiYuma.SwitchPlayer>();
+                fujiiYuma.PlayerController playerController = player.GetComponent<fujiiYuma.PlayerController>();
                 if (playerController != null)
                 {
                     playerController.TakeDamage(damage); //プレイヤーにダメージ
