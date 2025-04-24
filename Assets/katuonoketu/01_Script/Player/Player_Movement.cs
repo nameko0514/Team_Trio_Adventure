@@ -5,7 +5,6 @@ namespace Takato
 {
     public class Player_Movement : fujiiYuma.SwitchPlayer
     {
-
         protected override void Start()
         {
             base.Start();  //ベースクラスの初期化呼び出し
