@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Takato
 {
-    public class Player_Movement : fujiiYuma.SwitchPlayer
+    public class Player_Movement : fujiiYuma.PlayerController
     {
         protected override void Start()
         {
