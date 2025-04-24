@@ -36,17 +36,22 @@ namespace fujiiYuma
         private void Awake()
         {
             circleCollider = GetComponent<CircleCollider2D>();
+
+            playerSwitchPlayer = GameObject.FindGameObjectWithTag("SwitchPlayer")?.gameObject;
         }
 
         private void Update()
         {
-            if (playerSwitchPlayer.CompareTag("Player"))
+            if (playerSwitchPlayer != null)
             {
-                if (playerSwitchPlayer.TryGetComponent<SwitchPlayer>(out var switchPlayer))
+                if (playerSwitchPlayer.CompareTag("SwitchPlayer"))
                 {
-                    if (switchPlayer.isTrigger)
+                    if (playerSwitchPlayer.TryGetComponent<SwitchPlayer>(out var switchPlayer))
                     {
-                        Debug.Log("aaaaaa");
+                        if (switchPlayer.isTrigger)
+                        {
+                            Debug.Log("aaaaaa");
+                        }
                     }
                 }
             }
