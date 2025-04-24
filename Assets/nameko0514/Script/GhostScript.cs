@@ -30,6 +30,9 @@ namespace fujiiYuma
 
         private CircleCollider2D circleCollider;
 
+        GameObject playerSwitchPlayer;
+
+
         private void Awake()
         {
             circleCollider = GetComponent<CircleCollider2D>();
@@ -37,6 +40,17 @@ namespace fujiiYuma
 
         private void Update()
         {
+            if (playerSwitchPlayer.CompareTag("Player"))
+            {
+                if (playerSwitchPlayer.TryGetComponent<SwitchPlayer>(out var switchPlayer))
+                {
+                    if (switchPlayer.isTrigger)
+                    {
+                        Debug.Log("aaaaaa");
+                    }
+                }
+            }
+
             time += Time.deltaTime;
 
             if(time > waitTime)

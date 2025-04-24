@@ -53,7 +53,7 @@ namespace Gishi {
         {
             if (player != null)
             {
-                PlayerController playerController = player.GetComponent<PlayerController>();
+                fujiiYuma.SwitchPlayer playerController = player.GetComponent<fujiiYuma.SwitchPlayer>();
                 if (playerController != null)
                 {
                     playerController.TakeDamage(damage); //プレイヤーにダメージ
