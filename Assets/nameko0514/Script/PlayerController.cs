@@ -61,6 +61,7 @@ namespace fujiiYuma{
             {
                 Debug.Log("Player‚ªEnemy‚ÆÕ“Ë‚µ‚Ü‚µ‚½B");
             }
+
         }
 
         public void TakeDamage(int damage)
@@ -99,5 +100,6 @@ namespace fujiiYuma{
             spriteRenderer.color = originalColor;
             isInvicible = false;
         }
+
     }
 }

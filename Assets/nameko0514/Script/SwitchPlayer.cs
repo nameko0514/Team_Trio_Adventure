@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class SwitchPlayer : MonoBehaviour
@@ -84,6 +85,8 @@ public class SwitchPlayer : MonoBehaviour
     // プレイヤーを切り替える関数
     void SwitchPlayers()
     {
+        PlayersAllNull();
+
         // 現在のプレイヤーのポジション取得
         playerPos = players[currentPlayerIndex].transform.position;
 
@@ -139,5 +142,13 @@ public class SwitchPlayer : MonoBehaviour
     public void ResetTrigger()
     {
         isTrigger = false;
+    }
+
+    private void PlayersAllNull()
+    {
+        if(players.All(x  => x != null))
+        {
+            //全てnullだった場合(全員死んだとき)
+        }
     }
 }
