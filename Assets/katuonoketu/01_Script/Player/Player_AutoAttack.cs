@@ -5,13 +5,13 @@ namespace Takato
 {
     public class Player_AutoAttack : MonoBehaviour
     {
-        [Header("’e‚ğ“ü‚ê‚é‚Æ‚±‚ë")]
+        [Header("---’e‚ğ“ü‚ê‚é‚Æ‚±‚ë---")]
         [SerializeField] private GameObject bulletPrefab;
-        [Header("’e‚Ì”­ËêŠ“ü‚ê‚é‚Æ‚±‚ë")]
+        [Header("---’e‚Ì”­ËêŠ“ü‚ê‚é‚Æ‚±‚ë---")]
         [SerializeField] private Transform firePoint;
-        [Header("˜AË‘¬“x")]
+        [Header("---˜AË‘¬“x---")]
         [SerializeField] private float fireRate = 1f;
-        [Header("UŒ‚”ÍˆÍw’è")]
+        [Header("---UŒ‚”ÍˆÍw’è---")]
         [SerializeField] private float attackRange = 5f;
 
         
