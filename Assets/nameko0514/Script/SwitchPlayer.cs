@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public class SwitchPlayer : MonoBehaviour
@@ -36,8 +37,10 @@ public class SwitchPlayer : MonoBehaviour
     }
 
     void Update()
-    {      
-        if(players[currentPlayerIndex] == null)
+    {
+        PlayersAllNull();
+
+        if (players[currentPlayerIndex] == null)
         {
             DeathSwitchPlayers();
         }
@@ -110,6 +113,12 @@ public class SwitchPlayer : MonoBehaviour
 
     private void DeathSwitchPlayers()
     {
+        if (PlayersAllNull())
+        {
+            Debug.Log("ゲームオーバー");
+            return;
+        }
+
         // 現在のプレイヤーのポジション取得
         playerPos = playerSwitchPos;
 
@@ -133,11 +142,27 @@ public class SwitchPlayer : MonoBehaviour
     void PerformSinglePressAction()
     {
         isTrigger = true;
-        Debug.Log($"Player {currentPlayerIndex + 1} jumped!");
+        Debug.Log($"{currentPlayerIndex + 1}： スキル発動");
     }
 
     public void ResetTrigger()
     {
         isTrigger = false;
+    }
+
+    private bool PlayersAllNull()
+    {
+        bool allNull = true;
+
+        foreach (var pla in players)
+        {
+            if(pla != null)
+            {
+                allNull = false;
+                break;
+            }
+        }
+
+        return allNull;
     }
 }
