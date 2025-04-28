@@ -17,7 +17,7 @@ namespace fujiiYuma{
 
         protected Rigidbody2D rb;
 
-        private Vector2 moveInput; //移動入力を格納する変数
+        protected Vector2 moveInput; //移動入力を格納する変数
 
         private bool isInvicible = false; //ダメージを受けてしばらくの間はダメージが通らないようにする変数
 
@@ -46,6 +46,7 @@ namespace fujiiYuma{
             moveInput.x = Input.GetAxis("Horizontal"); //左右の入力
             moveInput.y = Input.GetAxis("Vertical"); //上下の入力
 
+            PlayerDirection();
         }
 
         private void FixedUpdate()
@@ -101,5 +102,23 @@ namespace fujiiYuma{
             isInvicible = false;
         }
 
+        private void PlayerDirection()
+        {
+            if(moveInput.x == 1)
+            {
+                transform.localEulerAngles = Vector3.zero; 
+            }else if(moveInput.x == -1)
+            {
+                transform.localEulerAngles = new Vector3(0,0,180);
+            }
+
+            if(moveInput.y == 1)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, 90);
+            }else if(moveInput.y == -1)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, 270);
+            }
+        }
     }
 }

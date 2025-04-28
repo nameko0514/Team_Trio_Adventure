@@ -1,11 +1,12 @@
-using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SwitchPlayer : MonoBehaviour
 {
     // プレイヤーのGameObjectの配列
     public GameObject[] players;
     private int currentPlayerIndex = 0; // 現在アクティブなプレイヤーのインデックス
+
 
 
     // 長押し検出用の変数
@@ -38,7 +39,11 @@ public class SwitchPlayer : MonoBehaviour
 
     void Update()
     {
-        PlayersAllNull();
+        if (PlayersAllNull())
+        {
+            Debug.Log("ゲームオーバー");
+            return;
+        }
 
         if (players[currentPlayerIndex] == null)
         {
@@ -113,12 +118,6 @@ public class SwitchPlayer : MonoBehaviour
 
     private void DeathSwitchPlayers()
     {
-        if (PlayersAllNull())
-        {
-            Debug.Log("ゲームオーバー");
-            return;
-        }
-
         // 現在のプレイヤーのポジション取得
         playerPos = playerSwitchPos;
 

@@ -5,19 +5,19 @@ namespace Gishi
 {
     public class WaspController : MonoBehaviour
     {
-        [Header("�U���ݒ�")]
+        [Header("蜂の設定")]
 
-        [SerializeField] private GameObject bulletPrefab; // ���˂���e
+        [SerializeField] private GameObject bulletPrefab; // 弾
 
-        [SerializeField] private float attackCooldown = 2f; // �N�[���_�E��
+        [SerializeField] private float attackCooldown = 2f; // 攻撃のクールダウン
 
-        [SerializeField] private float bulletSpeed = 5f; // �e�̃X�s�[�h
+        [SerializeField] private float bulletSpeed = 5f; // 弾の移動速度
 
-        [SerializeField] private float attackRange = 7f; // �v���C���[�����m���鋗��
+        [SerializeField] private float attackRange = 7f; // 攻撃範囲
 
-        private Transform player; // �v���C���[�̈ʒu���L�^
+        private Transform player; // プレイヤーのTransform
 
-        private float nextAttackTime; // ���ɍU���ł��鎞��
+        private float nextAttackTime; // 次の攻撃時間
 
         private void Start()
         {
@@ -30,35 +30,35 @@ namespace Gishi
 
         private void Update()
         {
-            // �v���C���[���������Ă��Ȃ���Ή������Ȃ�
+            // プレイヤーがいない場合は何もしない
             if (player == null) return;
 
-            // �v���C���[�Ƃ̋������v�Z
+            // プレイヤーとの距離
             float distance = Vector2.Distance(transform.position, player.position);
 
-            // ��苗���� & �N�[���_�E�����I����Ă���΍U��
+            // プレイヤーが攻撃範囲内かつ攻撃可能時間になったら攻撃
             if (distance <= attackRange && Time.time >= nextAttackTime)
             {
-                Shoot(); // �e�𔭎�
+                Shoot(); // 発射
 
-                nextAttackTime = Time.time + attackCooldown; // ���̍U���\�������X�V
+                nextAttackTime = Time.time + attackCooldown; // 次に攻撃できる時間を更新
             }
         }
 
         private void Shoot()
         {
-            // �e�v���n�u�𐶐��i�ʒu�͌��݂̖I�̈ʒu�j
+            // 弾をプレイヤー方向に発射
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-            // �v���C���[�ւ̕��������߂Đ��K���i�����x�N�g���j
+            // プレイヤー方向のベクトルを計算
             Vector2 direction = (player.position - transform.position).normalized;
 
-            // �e�� Rigidbody2D �����Ă���Α��x��ݒ�
+            // 弾のRigidbody2Dコンポーネントを取得して移動させる
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
 
             if (rb != null)
             {
-                rb.linearVelocity = direction * bulletSpeed;
+                rb.linearVelocity = direction * bulletSpeed; // 弾を指定した速度で発射
             }
         }
     }
