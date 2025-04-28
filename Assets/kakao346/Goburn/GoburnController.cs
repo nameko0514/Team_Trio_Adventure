@@ -51,7 +51,7 @@ namespace Gishi {
 
         private void Attack()
         {
-            if (player != null)
+            if (player != null&& player.gameObject.activeSelf)
             {
                 fujiiYuma.PlayerController playerController = player.GetComponent<fujiiYuma.PlayerController>();
                 if (playerController != null)

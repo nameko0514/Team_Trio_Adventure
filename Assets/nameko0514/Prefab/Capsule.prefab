@@ -150,7 +150,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &6459375816798756488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ecd2bb7030e4340ac20af6e2a5a258, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2968384943961625640, guid: 5a6eebf9ca1bb1a48aa072930c84f25b, type: 3}
+  bulletPrefab: {fileID: 2968384943961625640, guid: 5c61cde2c07cddb40982e75084cb73c8, type: 3}
   firePoint: {fileID: 993791708739930171}
   fireRate: 1
   attackRange: 5
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b03e47fb19bd544baf9772a43b806b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillEffectPrefab: {fileID: 5674568379601349873, guid: fa025087abae5de42a042238d16797a4, type: 3}
+  skillEffectPrefab: {fileID: 5674568379601349873, guid: d0c28d4227c0909489a1c589d578b5ce, type: 3}
   firePoint: {fileID: 993791708739930171}
   fireRate: 3
 --- !u!70 &9005267644640008090

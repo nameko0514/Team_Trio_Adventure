@@ -59,7 +59,7 @@ namespace fujiiYuma{
             moveInput.y = Input.GetAxis("Vertical"); //è„â∫ÇÃì¸óÕ
 
             WallLineCast();
-            IsWallHit();
+           // IsWallHit();
 
             PlayerDirection();
         }
@@ -86,13 +86,18 @@ namespace fujiiYuma{
 
             health = Mathf.Max(health - damage, 0);
 
-            StartCoroutine(FlashCoroutine());
+            
 
             if (health == 0)
             {
                 //ëÃóÕ(ÉnÅ[Ég)Ç™Ç»Ç≠Ç»Ç¡ÇΩéûÇÃèàóù
 
                 Destroy(gameObject);
+            }
+            else
+            {
+
+                StartCoroutine(FlashCoroutine());
             }
         }
 
@@ -140,7 +145,7 @@ namespace fujiiYuma{
         {
             float lineSize = 0.5f;
             float lineSizeB = 0.05f;
-            rightStart = transform.position + (transform.right * 0.66f) + (transform.up * lineSizeB);
+            rightStart = transform.position + (transform.right * 0.66f) + (transform.up * 0.3f);
             rightEnd = transform.position + (transform.right * 0.66f) - (transform.up * lineSizeB);
 
             leftStart = transform.position + (-transform.right * 0.66f) + (transform.up * lineSizeB);
