@@ -136,7 +136,7 @@ public class SwitchPlayer : MonoBehaviour
     void PerformSinglePressAction()
     {
         isTrigger = true;
-        Debug.Log($"Player {currentPlayerIndex + 1} jumped!");
+        Debug.Log($"{currentPlayerIndex + 1}： スキル発動");
     }
 
     public void ResetTrigger()
@@ -146,9 +146,6 @@ public class SwitchPlayer : MonoBehaviour
 
     private void PlayersAllNull()
     {
-        if(players.All(x  => x != null))
-        {
-            //全てnullだった場合(全員死んだとき)
-        }
+        
     }
 }
