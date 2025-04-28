@@ -6,103 +6,96 @@ namespace Gishi
 {
     public class BossController : MonoBehaviour
     {
-        [Header("�{�X�ݒ�")]
-        [SerializeField] private float moveSpeed = 3f; // �ړ����x
-        [SerializeField] private float attackRange = 5f; // �ߋ����U���͈�
-        [SerializeField] private float shootRange = 10f; // �������U���͈�
-        [SerializeField] private float guardDuration = 2f; // �K�[�h
-        [SerializeField] private float attackCooldown = 3f; // �U���̃N�[���_�E��
-        [SerializeField] private float health = 20f; // �{�X�̗̑�
+        [Header("ボス設定")]
+        [SerializeField] private float moveSpeed = 3f; // ボスの移動速度
+        [SerializeField] private float attackRange = 5f; // 近距離攻撃範囲
+        [SerializeField] private float shootRange = 10f; // 遠距離攻撃範囲
+        [SerializeField] private float guardDuration = 2f; // ガードの持続時間
+        [SerializeField] private float attackCooldown = 1f; // 攻撃のクールダウン
+        [SerializeField] private float health = 20f; // ボスの体力
 
-        [Header("�U���ݒ�")]
-        [SerializeField] private GameObject bulletPrefab; // �e
-        [SerializeField] private Transform bulletSpawnPoint; // �e�̔��ˈʒu
-        [SerializeField] private float bulletSpeed = 5f; // �e�̈ړ����x
+        [Header("攻撃設定")]
+        [SerializeField] private GameObject bulletPrefab; // 弾
+        [SerializeField] private Transform bulletSpawnPoint; // 弾の発射位置
+        [SerializeField] private float bulletSpeed = 5f; // 弾の移動速度
 
-
-        private Transform player; // �v���C���[��Transform
-        private float nextAttackTime; // ���̍U���\����
-        private bool isGuarding = false; // �K�[�h��Ԃ��ǂ���
-
+        private Transform player; // プレイヤーのTransform
+        private float nextAttackTime; // 次の攻撃可能時間
+        private bool isGuarding = false; // ガード判断
 
         private Rigidbody2D rb;
 
-        private Animator animator;  // �A�j���[�V����
-
-        [Header("�U���֘A")]
-        [SerializeField] private GameObject projectilePrefab;  // �������U���̒e
-        [SerializeField] private float shootCooldown = 2f;  // �e�̔��ˊԊu
+        private Animator animator;  //アニメーションつけるなら
 
         private float lastShootTime;
 
-        private void Awake()
+        private void Start()
         {
-            rb = GetComponent<Rigidbody2D>();
-            animator = GetComponent<Animator>();
-            player = GameObject.FindGameObjectWithTag("Player").transform;  // �v���C���[���^�O�ŒT��
+            player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-       
+
         private void Update()
         {
-            // �v���C���[�����݂��Ȃ��ꍇ�A�������Ȃ�
+            // プレイヤーが存在しない場合、何もしない
             if (player == null) return;
 
-            // �v���C���[�Ƃ̋������v�Z
+            // プレイヤーとの距離を計算
             float distance = Vector2.Distance(transform.position, player.position);
 
-            // �ǔ����[�h
+            // 追尾モード
             ChasePlayer();
 
-            // �v���C���[���ߋ����͈͓��Ȃ�ߐڍU��
+            // プレイヤーが近距離範囲内なら近接攻撃
             if (distance <= attackRange)
             {
                 MeleeAttack();
             }
-            // �v���C���[���������͈͓��Ȃ牓�����U��
+            // プレイヤーが遠距離範囲内なら遠距離攻撃
             else if (distance <= shootRange && Time.time >= nextAttackTime)
             {
                 ShootProjectile();
-                nextAttackTime = Time.time + attackCooldown; // ���̍U���\����
+                nextAttackTime = Time.time + attackCooldown; // 次の攻撃可能時間
             }
-
         }
 
         private void ChasePlayer()
         {
-            if (isGuarding) return; // �K�[�h���͒ǔ����Ȃ�
+            if (isGuarding) return; // ガード中は追尾しない
 
-            // �v���C���[�̈ʒu�����Ĉړ�����
+            // プレイヤーの位置を見て移動する
             Vector2 direction = (player.position - transform.position).normalized;
             transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
         }
 
         private void MeleeAttack()
         {
-            // �v���C���[�ɋ߂��ꍇ�A�ߐڍU��
-            Debug.Log("�ߐڍU��");
+            // プレイヤーに近い場合、近接攻撃（例: プレイヤーに衝突ダメージを与える）
+            Debug.Log("近接攻撃");
+
+            // ここで近接攻撃の処理を追加（例えばアニメーションの再生など）
         }
 
         private void ShootProjectile()
         {
-            // �e���v���C���[�����ɔ���
+            // 弾をプレイヤー方向に発射
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
             Vector2 direction = (player.position - transform.position).normalized;
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
-                rb.linearVelocity = direction * bulletSpeed; // �e���v���C���[�����ɔ���
+                rb.linearVelocity = direction * bulletSpeed; // 弾をプレイヤー方向に発射
             }
 
-            Debug.Log("�������U��");
+            Debug.Log("遠距離攻撃");
         }
 
         public void TakeDamage(float damage)
         {
-            if (isGuarding) return; // �K�[�h���̓_���[�W���󂯂Ȃ�
+            if (isGuarding) return; // ガード中はダメージを受けない
 
             health -= damage;
-            Debug.Log("�{�X�̗̑�: " + health);
+            Debug.Log("ボスの体力: " + health);
 
             if (health <= 0)
             {
@@ -112,8 +105,8 @@ namespace Gishi
 
         private void Die()
         {
-            // ���S���̏���
-            Debug.Log("�{�X�����S�����I");
+            // 死亡時の処理
+            Debug.Log("ボスが死亡した！");
             Destroy(gameObject);
         }
 
@@ -122,16 +115,16 @@ namespace Gishi
             if (isGuarding) return;
 
             isGuarding = true;
-            Debug.Log("�K�[�h�J�n");
+            Debug.Log("ガード開始");
 
-            // ��莞�Ԍ�ɃK�[�h���I��
+            // 一定時間後にガードを終了
             Invoke("EndGuard", guardDuration);
         }
 
         private void EndGuard()
         {
             isGuarding = false;
-            Debug.Log("�K�[�h�I��");
+            Debug.Log("ガード終了");
         }
     }
 
