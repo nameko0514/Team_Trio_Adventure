@@ -46,6 +46,7 @@ namespace fujiiYuma{
             moveInput.x = Input.GetAxis("Horizontal"); //ç∂âEÇÃì¸óÕ
             moveInput.y = Input.GetAxis("Vertical"); //è„â∫ÇÃì¸óÕ
 
+            PlayerDirection();
         }
 
         private void FixedUpdate()
@@ -101,5 +102,23 @@ namespace fujiiYuma{
             isInvicible = false;
         }
 
+        private void PlayerDirection()
+        {
+            if(moveInput.x == 1)
+            {
+                transform.localEulerAngles = Vector3.zero; 
+            }else if(moveInput.x == -1)
+            {
+                transform.localEulerAngles = new Vector3(0,0,180);
+            }
+
+            if(moveInput.y == 1)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, 90);
+            }else if(moveInput.y == -1)
+            {
+                transform.localEulerAngles = new Vector3(0, 0, 270);
+            }
+        }
     }
 }
