@@ -58,7 +58,7 @@ namespace Gishi
 
             if (rb != null)
             {
-                rb.velocity = direction * bulletSpeed; // 弾を指定した速度で発射
+                rb.linearVelocity = direction * bulletSpeed; // 弾を指定した速度で発射
             }
         }
     }

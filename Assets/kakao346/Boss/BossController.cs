@@ -1,34 +1,137 @@
 using UnityEngine;
 using fujiiYuma;
+using System.Collections;
 
 namespace Gishi
 {
     public class BossController : MonoBehaviour
     {
-        [Header("----’Ç”ö‚Ì‘¬“x----")]
-        [SerializeField] float moveSpeed = 2f;
+        [Header("ï¿½{ï¿½Xï¿½İ’ï¿½")]
+        [SerializeField] private float moveSpeed = 3f; // ï¿½Ú“ï¿½ï¿½ï¿½ï¿½x
+        [SerializeField] private float attackRange = 5f; // ï¿½ß‹ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½Íˆï¿½
+        [SerializeField] private float shootRange = 10f; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½Íˆï¿½
+        [SerializeField] private float guardDuration = 2f; // ï¿½Kï¿½[ï¿½h
+        [SerializeField] private float attackCooldown = 3f; // ï¿½Uï¿½ï¿½ï¿½ÌƒNï¿½[ï¿½ï¿½ï¿½_ï¿½Eï¿½ï¿½
+        [SerializeField] private float health = 20f; // ï¿½{ï¿½Xï¿½Ì‘Ì—ï¿½
 
-        [Header("----player‚Æ‚ÌÅ¬‹——£----")]
-        [SerializeField] private float minDistance = 0.1f;
-
-        [Header("----UŒ‚ŠÖ˜A----")]
-        [SerializeField] private float attackRange = 2f; //UŒ‚‹——£
-        [SerializeField] private float attackCooldown = 4f; //ƒN[ƒ‹ƒ^ƒCƒ€
-        [SerializeField] private int damage = 7; //UŒ‚—Í
-
-        [Header("----ƒ{ƒX‚Ì‘Ì—Í----")]
-        [SerializeField] private int maxHealth = 20;
+        [Header("ï¿½Uï¿½ï¿½ï¿½İ’ï¿½")]
+        [SerializeField] private GameObject bulletPrefab; // ï¿½e
+        [SerializeField] private Transform bulletSpawnPoint; // ï¿½eï¿½Ì”ï¿½ï¿½ËˆÊ’u
+        [SerializeField] private float bulletSpeed = 5f; // ï¿½eï¿½ÌˆÚ“ï¿½ï¿½ï¿½ï¿½x
 
 
-        void Start()
+        private Transform player; // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½Transform
+        private float nextAttackTime; // ï¿½ï¿½ï¿½ÌUï¿½ï¿½ï¿½Â”\ï¿½ï¿½ï¿½ï¿½
+        private bool isGuarding = false; // ï¿½Kï¿½[ï¿½hï¿½ï¿½Ô‚ï¿½ï¿½Ç‚ï¿½ï¿½ï¿½
+
+
+        private Rigidbody2D rb;
+
+        private Animator animator;  // ï¿½Aï¿½jï¿½ï¿½ï¿½[ï¿½Vï¿½ï¿½ï¿½ï¿½
+
+        [Header("ï¿½Uï¿½ï¿½ï¿½Ö˜A")]
+        [SerializeField] private GameObject projectilePrefab;  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½ï¿½Ì’e
+        [SerializeField] private float shootCooldown = 2f;  // ï¿½eï¿½Ì”ï¿½ï¿½ËŠÔŠu
+
+        private float lastShootTime;
+
+        private void Awake()
         {
-        
+            rb = GetComponent<Rigidbody2D>();
+            animator = GetComponent<Animator>();
+            player = GameObject.FindGameObjectWithTag("Player").transform;  // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½^ï¿½Oï¿½Å’Tï¿½ï¿½
+        }
+       
+        private void Update()
+        {
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½İ‚ï¿½ï¿½È‚ï¿½ï¿½ê‡ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½
+            if (player == null) return;
+
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½Æ‚Ì‹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½vï¿½Z
+            float distance = Vector2.Distance(transform.position, player.position);
+
+            // ï¿½Ç”ï¿½ï¿½ï¿½ï¿½[ï¿½h
+            ChasePlayer();
+
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ß‹ï¿½ï¿½ï¿½ï¿½ÍˆÍ“ï¿½ï¿½È‚ï¿½ßÚUï¿½ï¿½
+            if (distance <= attackRange)
+            {
+                MeleeAttack();
+            }
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÍˆÍ“ï¿½ï¿½È‚ç‰“ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½
+            else if (distance <= shootRange && Time.time >= nextAttackTime)
+            {
+                ShootProjectile();
+                nextAttackTime = Time.time + attackCooldown; // ï¿½ï¿½ï¿½ÌUï¿½ï¿½ï¿½Â”\ï¿½ï¿½ï¿½ï¿½
+            }
+
         }
 
-        // Update is called once per frame
-        void Update()
+        private void ChasePlayer()
         {
-        
+            if (isGuarding) return; // ï¿½Kï¿½[ï¿½hï¿½ï¿½ï¿½Í’Ç”ï¿½ï¿½ï¿½ï¿½È‚ï¿½
+
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ÌˆÊ’uï¿½ï¿½ï¿½ï¿½ï¿½ÄˆÚ“ï¿½ï¿½ï¿½ï¿½ï¿½
+            Vector2 direction = (player.position - transform.position).normalized;
+            transform.position = Vector2.MoveTowards(transform.position, player.position, moveSpeed * Time.deltaTime);
+        }
+
+        private void MeleeAttack()
+        {
+            // ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½É‹ß‚ï¿½ï¿½ê‡ï¿½Aï¿½ßÚUï¿½ï¿½
+            Debug.Log("ï¿½ßÚUï¿½ï¿½");
+        }
+
+        private void ShootProjectile()
+        {
+            // ï¿½eï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½É”ï¿½ï¿½ï¿½
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            Vector2 direction = (player.position - transform.position).normalized;
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                rb.linearVelocity = direction * bulletSpeed; // ï¿½eï¿½ï¿½ï¿½vï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½ï¿½ï¿½É”ï¿½ï¿½ï¿½
+            }
+
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Uï¿½ï¿½");
+        }
+
+        public void TakeDamage(float damage)
+        {
+            if (isGuarding) return; // ï¿½Kï¿½[ï¿½hï¿½ï¿½ï¿½Íƒ_ï¿½ï¿½ï¿½[ï¿½Wï¿½ï¿½ï¿½ó‚¯‚È‚ï¿½
+
+            health -= damage;
+            Debug.Log("ï¿½{ï¿½Xï¿½Ì‘Ì—ï¿½: " + health);
+
+            if (health <= 0)
+            {
+                Die();
+            }
+        }
+
+        private void Die()
+        {
+            // ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½Ìï¿½ï¿½ï¿½
+            Debug.Log("ï¿½{ï¿½Xï¿½ï¿½ï¿½ï¿½ï¿½Sï¿½ï¿½ï¿½ï¿½ï¿½I");
+            Destroy(gameObject);
+        }
+
+        public void StartGuard()
+        {
+            if (isGuarding) return;
+
+            isGuarding = true;
+            Debug.Log("ï¿½Kï¿½[ï¿½hï¿½Jï¿½n");
+
+            // ï¿½ï¿½èï¿½ÔŒï¿½ÉƒKï¿½[ï¿½hï¿½ï¿½ï¿½Iï¿½ï¿½
+            Invoke("EndGuard", guardDuration);
+        }
+
+        private void EndGuard()
+        {
+            isGuarding = false;
+            Debug.Log("ï¿½Kï¿½[ï¿½hï¿½Iï¿½ï¿½");
         }
     }
 
