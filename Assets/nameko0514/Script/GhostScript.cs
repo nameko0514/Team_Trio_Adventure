@@ -30,7 +30,7 @@ namespace fujiiYuma
 
         private CircleCollider2D circleCollider;
 
-
+  
         private void Awake()
         {
             circleCollider = GetComponent<CircleCollider2D>();

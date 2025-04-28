@@ -17,7 +17,7 @@ namespace fujiiYuma{
 
         protected Rigidbody2D rb;
 
-        private Vector2 moveInput; //移動入力を格納する変数
+        protected Vector2 moveInput; //移動入力を格納する変数
 
         private bool isInvicible = false; //ダメージを受けてしばらくの間はダメージが通らないようにする変数
 
