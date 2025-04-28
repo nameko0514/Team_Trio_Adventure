@@ -37,8 +37,10 @@ public class SwitchPlayer : MonoBehaviour
     }
 
     void Update()
-    {      
-        if(players[currentPlayerIndex] == null)
+    {
+        PlayersAllNull();
+
+        if (players[currentPlayerIndex] == null)
         {
             DeathSwitchPlayers();
         }
@@ -85,8 +87,6 @@ public class SwitchPlayer : MonoBehaviour
     // プレイヤーを切り替える関数
     void SwitchPlayers()
     {
-        PlayersAllNull();
-
         // 現在のプレイヤーのポジション取得
         playerPos = players[currentPlayerIndex].transform.position;
 
@@ -113,6 +113,12 @@ public class SwitchPlayer : MonoBehaviour
 
     private void DeathSwitchPlayers()
     {
+        if (PlayersAllNull())
+        {
+            Debug.Log("ゲームオーバー");
+            return;
+        }
+
         // 現在のプレイヤーのポジション取得
         playerPos = playerSwitchPos;
 
@@ -144,8 +150,19 @@ public class SwitchPlayer : MonoBehaviour
         isTrigger = false;
     }
 
-    private void PlayersAllNull()
+    private bool PlayersAllNull()
     {
-        
+        bool allNull = true;
+
+        foreach (var pla in players)
+        {
+            if(pla != null)
+            {
+                allNull = false;
+                break;
+            }
+        }
+
+        return allNull;
     }
 }
