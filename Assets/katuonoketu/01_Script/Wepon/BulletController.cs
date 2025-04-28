@@ -4,6 +4,7 @@ namespace Takato
 {
     public class BulletController : MonoBehaviour
     {
+        [Tooltip("弾の処理")]
         [Header("---弾のスピード---")]
         [SerializeField] private float speed;
         [Header("---弾のダメージ---")]
