@@ -7,18 +7,18 @@ namespace Takato
     {
         [Tooltip("----’e‚ÌÚ×İ’è----")]
         [Header("---’e‚ğ“ü‚ê‚é‚Æ‚±‚ë---")]
-        [SerializeField] private GameObject bulletPrefab;
+        [SerializeField] private GameObject bulletPrefab;  //’e‚ÌPrefab
 
         [Header("---’e‚Ì”­ËêŠ“ü‚ê‚é‚Æ‚±‚ë---")]
-        [SerializeField] private Transform firePoint;
+        [SerializeField] private Transform firePoint;@@ //’e‚Ì”­ËˆÊ’u
 
         [Header("---˜AË‘¬“x---")]
-        [SerializeField] private float fireRate;
+        [SerializeField] private float fireRate;         //’e‚Ì”­ËŠÔŠu(•b)
 
         [Header("---UŒ‚”ÍˆÍw’è---")]
-        [SerializeField] private float attackRange;
+        [SerializeField] private float attackRange;      //UŒ‚”ÍˆÍ(”¼Œa)
 
-        
+
         private float nextFireTime;
 
         //ƒLƒƒƒ‰‚ÌŒü‚«æ“¾—p
@@ -80,7 +80,6 @@ namespace Takato
                     nearest = enemy;
                 }
             }
-
             return nearest;
         }
 
