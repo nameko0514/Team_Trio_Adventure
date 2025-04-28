@@ -5,14 +5,18 @@ namespace Takato
 {
     public class Player_AutoAttack : MonoBehaviour
     {
+        [Tooltip("----弾の詳細設定----")]
         [Header("---弾を入れるところ---")]
         [SerializeField] private GameObject bulletPrefab;
+
         [Header("---弾の発射場所入れるところ---")]
         [SerializeField] private Transform firePoint;
+
         [Header("---連射速度---")]
-        [SerializeField] private float fireRate = 1f;
+        [SerializeField] private float fireRate;
+
         [Header("---攻撃範囲指定---")]
-        [SerializeField] private float attackRange = 5f;
+        [SerializeField] private float attackRange;
 
         
         private float nextFireTime;
@@ -62,7 +66,14 @@ namespace Takato
 
             foreach (var enemy in enemies)
             {
-                float dist = Vector2.Distance(transform.position, enemy.transform.position);
+                Vector2 toEnemy = enemy.transform.position - transform.position;
+                float dist = toEnemy.sqrMagnitude;   // 距離の二乗を計算
+
+                //プレイヤーの向きに敵がいるかどうか
+                float dot = Vector2.Dot(transform.right, (enemy.transform.position - transform.position).normalized);
+
+                if (dot < 0) continue;    // プレイヤーの向きと逆方向に敵がいる場合はスキップ
+
                 if (dist < minDist)
                 {
                     minDist = dist;
