@@ -8,7 +8,7 @@ namespace Gishi {
         [SerializeField] float moveSpeed = 3f;
 
         [Header("----player‚Æ‚ÌÅ¬‹——£----")]
-        [SerializeField] private float minDistance = 0.1f;
+        [SerializeField] private float minDistance = 0.1f;  //¡‚Ì‚Æ‚±‚ëg‚í‚È‚¢‚¯‚Çˆê‰
 
         [Header("----UŒ‚ŠÖ˜A----")]
         [SerializeField] private float attackRange = 1.5f; //UŒ‚‹——£
