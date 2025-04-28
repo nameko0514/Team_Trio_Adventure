@@ -7,23 +7,44 @@ namespace Takato
         private SwitchPlayer switchPlayer;
 
         [Header("---好きなスキルのGameObject入れてね！---")]
-        [SerializeField] private GameObject skillEffectPrefab;
+        [SerializeField] private GameObject skillEffectPrefab;　// スキルのエフェクトPrefab
 
         [Header("---FirePointをいれてね！(空のGameObject)---")]
-        [SerializeField] private Transform firePoint;
+        [SerializeField] private Transform firePoint;  // 発射位置
+
+        [Header("---スキルの発動間隔---")]
+        [SerializeField] private float fireRate; // スキルの発動間隔
+
+
+        private float lastFireTime = -Mathf.Infinity; // 最後のスキルの発動時間
 
         void Start()
         {
             // SwitchPlayerをFindFirstObjectByTypeで取得する。
             switchPlayer = Object.FindFirstObjectByType<SwitchPlayer>();
+
+            if (switchPlayer == null)
+            {
+                Debug.LogError("SwitchPlayerがシーン上に見つかりませんでした！");
+            }
         }
 
         void Update()
         {
             if (switchPlayer != null && switchPlayer.isTrigger)
             {
-                UseSkill();
+                TryUseSkill();
                 switchPlayer.ResetTrigger(); // トリガーをリセットして多重発動を防ぐ
+            }
+        }
+
+        void TryUseSkill()
+        {
+            // スキルの発動間隔をチェック
+            if (Time.time - lastFireTime >= fireRate)
+            {
+                lastFireTime = Time.time; // 最後の発動時間を更新
+                UseSkill();
             }
         }
 
