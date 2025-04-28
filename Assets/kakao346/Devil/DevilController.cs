@@ -18,11 +18,11 @@ namespace Gishi
 
                 player.TakeDamage(damage); // P体力を減らす
 
-                //// プレイヤーが操作反転を持っているか確認して付与
-                //if (player is IReverseControl reverseControl)　　　//IReverseControlをScriptsフォルダーに追加してほしいです
-                //{
-                //    reverseControl.ApplyReverseControl(debuffTime);  // 反転デバフを与える
-                //}
+                // プレイヤーが操作反転を持っているか確認して付与
+                if (player is IReverseControl1 reverseControl)　　　//IReverseControlをScriptsフォルダーに追加してほしいです
+                {
+                    reverseControl.ApplyReverseControl(debuffTime);  // 反転デバフを与える
+                }
             }
         }
        
