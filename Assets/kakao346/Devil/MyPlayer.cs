@@ -22,8 +22,8 @@ namespace Gishi
                 vertical *= -1;
             }
 
-            //moveInput.x = horizontal;
-            //moveInput.y = vertical;
+            moveInput.x = horizontal;
+            moveInput.y = vertical;
         }
 
         public void ApplyReverseControl(float duration)
