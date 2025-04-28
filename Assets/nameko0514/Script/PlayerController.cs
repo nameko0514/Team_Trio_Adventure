@@ -12,9 +12,6 @@ namespace fujiiYuma{
         [Header("----速さ----")]
         [SerializeField] protected float speed = 3f;
 
-        [Header("----EnemyLayer----")]
-        [SerializeField] protected LayerMask enemyLayer;
-
         protected Rigidbody2D rb;
 
         protected Vector2 moveInput; //移動入力を格納する変数
@@ -26,6 +23,21 @@ namespace fujiiYuma{
         private Color originalColor;
 
         private Color flashColor = new Color(1f, 0.5f, 0.5f, 0.4f);  //フラッシュするための変数
+
+        Vector2 rightStart;
+        Vector2 rightEnd;
+        Vector2 leftStart;
+        Vector2 leftEnd;
+        Vector2 upStart;
+        Vector2 upEnd;
+        Vector2 downStart;
+        Vector2 downEnd;
+        RaycastHit2D leftHit;
+        RaycastHit2D rightHit;
+        RaycastHit2D upHit;
+        RaycastHit2D downHit;
+        [Header("かべ")]
+        [SerializeField] LayerMask wall;
 
         private void Awake()
         {
@@ -45,6 +57,9 @@ namespace fujiiYuma{
         {
             moveInput.x = Input.GetAxis("Horizontal"); //左右の入力
             moveInput.y = Input.GetAxis("Vertical"); //上下の入力
+
+            WallLineCast();
+            IsWallHit();
 
             PlayerDirection();
         }
@@ -119,6 +134,62 @@ namespace fujiiYuma{
             {
                 transform.localEulerAngles = new Vector3(0, 0, 270);
             }
+        }
+
+        private void WallLineCast()
+        {
+            float lineSize = 0.5f;
+            float lineSizeB = 0.05f;
+            rightStart = transform.position + (transform.right * 0.66f) + (transform.up * lineSizeB);
+            rightEnd = transform.position + (transform.right * 0.66f) - (transform.up * lineSizeB);
+
+            leftStart = transform.position + (-transform.right * 0.66f) + (transform.up * lineSizeB);
+            leftEnd = transform.position + (-transform.right * 0.66f) - (transform.up * lineSizeB);
+
+            upStart = transform.position + (transform.right * lineSizeB) + (transform.up * 0.66f);
+            upEnd = transform.position + (-transform.right * lineSizeB) + (transform.up * 0.66f);
+
+            downStart = transform.position + (transform.right * lineSizeB) - (transform.up * 0.66f);
+            downEnd = transform.position + (-transform.right * lineSizeB) - (transform.up * 0.66f);
+
+
+            rightHit = Physics2D.Linecast(rightStart, rightEnd, wall);
+            leftHit = Physics2D.Linecast(leftStart, leftEnd, wall);
+            upHit = Physics2D.Linecast(upStart, upEnd, wall);
+            downHit = Physics2D.Linecast(downStart, downEnd, wall);
+
+            Debug.DrawLine(rightStart, rightEnd, Color.red);
+            Debug.DrawLine(leftStart, leftEnd, Color.red);
+            Debug.DrawLine(upStart, upEnd, Color.red);
+            Debug.DrawLine(downStart, downEnd, Color.red);
+
+        }
+        private void IsWallHit()
+        {
+            float knockback = 1.2f;
+            if (rightHit)
+            {
+                // nowSpeed = Mathf.Abs(nowSpeed) * -1;
+                transform.position = new Vector2(transform.position.x - knockback, transform.position.y);
+            }
+            else if (leftHit)
+            {
+                transform.position = new Vector2(transform.position.x + knockback, transform.position.y);
+            }
+            else if (upHit)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y - knockback);
+
+            }
+            else if (downHit)
+            {
+                transform.position = new Vector2(transform.position.x, transform.position.y + knockback);
+
+            }
+            //else
+            //{
+            //    nowSpeed = Mathf.Abs(nowSpeed);
+            //}
         }
     }
 }

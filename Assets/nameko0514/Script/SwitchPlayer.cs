@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +7,6 @@ public class SwitchPlayer : MonoBehaviour
     // プレイヤーのGameObjectの配列
     public GameObject[] players;
     private int currentPlayerIndex = 0; // 現在アクティブなプレイヤーのインデックス
-
-
 
     // 長押し検出用の変数
     private float pressStartTime; // キーを押し始めた時間
@@ -42,6 +41,9 @@ public class SwitchPlayer : MonoBehaviour
         if (PlayersAllNull())
         {
             Debug.Log("ゲームオーバー");
+            //Playerが全滅した時
+            //SceneManager.LoadScene("GameOverScene");
+
             return;
         }
 
