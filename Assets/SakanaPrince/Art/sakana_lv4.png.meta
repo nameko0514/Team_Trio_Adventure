@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sakana_lv4_0: 3204414279499510662
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
