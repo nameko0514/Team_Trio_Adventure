@@ -22,7 +22,7 @@ namespace Gishi
             {
                 player.TakeDamage(damage); // プレイヤーのHPを減らす
 
-                Destroy(gameObject); // 弾も消す
+                Destroy(gameObject); // 弾消す
             }
 
             // 地形に当たった場合も消す（Groundレイヤーにした方が良いらしい）
