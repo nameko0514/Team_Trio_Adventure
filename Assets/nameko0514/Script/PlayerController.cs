@@ -124,18 +124,18 @@ namespace fujiiYuma{
 
         private void PlayerDirection()
         {
-            if(moveInput.x == 1)
+            if(moveInput.x >= 0.3)
             {
                 transform.localEulerAngles = Vector3.zero; 
-            }else if(moveInput.x == -1)
+            }else if(moveInput.x <= -0.3)
             {
                 transform.localEulerAngles = new Vector3(0,0,180);
             }
 
-            if(moveInput.y == 1)
+            if(moveInput.y >= 0.3)
             {
                 transform.localEulerAngles = new Vector3(0, 0, 90);
-            }else if(moveInput.y == -1)
+            }else if(moveInput.y <= -0.3)
             {
                 transform.localEulerAngles = new Vector3(0, 0, 270);
             }
@@ -169,6 +169,12 @@ namespace fujiiYuma{
             Debug.DrawLine(downStart, downEnd, Color.red);
 
         }
+
+        public void ResetIsInvicible()
+        {
+            isInvicible = false;
+        }
+
         private void IsWallHit()
         {
             float knockback = 1.2f;

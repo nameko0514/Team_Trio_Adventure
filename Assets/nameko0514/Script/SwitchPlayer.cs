@@ -1,3 +1,4 @@
+using fujiiYuma;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,8 @@ public class SwitchPlayer : MonoBehaviour
     private Vector2 playerSwitchPos;
 
     public bool isTrigger { get; private set; } = false;
+
+    private GameObject player;
 
     void Start()
     {
@@ -46,6 +49,8 @@ public class SwitchPlayer : MonoBehaviour
 
             return;
         }
+
+        player = GameObject.FindGameObjectWithTag("Player")?.gameObject;
 
         if (players[currentPlayerIndex] == null)
         {
@@ -94,6 +99,17 @@ public class SwitchPlayer : MonoBehaviour
     // プレイヤーを切り替える関数
     void SwitchPlayers()
     {
+        if(player != null)
+        {
+            if (player.CompareTag("Player"))
+            {
+                if(player.TryGetComponent<PlayerController>(out var playerController))
+                {
+                    playerController.ResetIsInvicible();
+                }
+            }
+        }
+
         // 現在のプレイヤーのポジション取得
         playerPos = players[currentPlayerIndex].transform.position;
 
