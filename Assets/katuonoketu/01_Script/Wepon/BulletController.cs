@@ -17,7 +17,7 @@ namespace Takato
         private void Awake()
         {
             Destroy(gameObject, lifetime);
-            Debug.Log("íeè¡Ç¶ÇΩ");
+            Debug.Log("íeè¡ñ≈");
 
             //Rigitbody2DÇÃéÊìæ    
             rb = GetComponent<Rigidbody2D>();

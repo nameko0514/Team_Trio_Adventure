@@ -5,16 +5,20 @@ namespace Takato
 {
     public class Player_AutoAttack : MonoBehaviour
     {
+        [Tooltip("----’e‚ÌÚ×İ’è----")]
         [Header("---’e‚ğ“ü‚ê‚é‚Æ‚±‚ë---")]
-        [SerializeField] private GameObject bulletPrefab;
-        [Header("---’e‚Ì”­ËêŠ“ü‚ê‚é‚Æ‚±‚ë---")]
-        [SerializeField] private Transform firePoint;
-        [Header("---˜AË‘¬“x---")]
-        [SerializeField] private float fireRate = 1f;
-        [Header("---UŒ‚”ÍˆÍw’è---")]
-        [SerializeField] private float attackRange = 5f;
+        [SerializeField] private GameObject bulletPrefab;  //’e‚ÌPrefab
 
-        
+        [Header("---’e‚Ì”­ËêŠ“ü‚ê‚é‚Æ‚±‚ë---")]
+        [SerializeField] private Transform firePoint;@@ //’e‚Ì”­ËˆÊ’u
+
+        [Header("---˜AË‘¬“x---")]
+        [SerializeField] private float fireRate;         //’e‚Ì”­ËŠÔŠu(•b)
+
+        [Header("---UŒ‚”ÍˆÍw’è---")]
+        [SerializeField] private float attackRange;      //UŒ‚”ÍˆÍ(”¼Œa)
+
+
         private float nextFireTime;
 
         //ƒLƒƒƒ‰‚ÌŒü‚«æ“¾—p
@@ -62,14 +66,20 @@ namespace Takato
 
             foreach (var enemy in enemies)
             {
-                float dist = Vector2.Distance(transform.position, enemy.transform.position);
+                Vector2 toEnemy = enemy.transform.position - transform.position;
+                float dist = toEnemy.sqrMagnitude;   // ‹——£‚Ì“ñæ‚ğŒvZ
+
+                //ƒvƒŒƒCƒ„[‚ÌŒü‚«‚É“G‚ª‚¢‚é‚©‚Ç‚¤‚©
+                float dot = Vector2.Dot(transform.right, (enemy.transform.position - transform.position).normalized);
+
+                if (dot < 0) continue;    // ƒvƒŒƒCƒ„[‚ÌŒü‚«‚Æ‹t•ûŒü‚É“G‚ª‚¢‚éê‡‚ÍƒXƒLƒbƒv
+
                 if (dist < minDist)
                 {
                     minDist = dist;
                     nearest = enemy;
                 }
             }
-
             return nearest;
         }
 

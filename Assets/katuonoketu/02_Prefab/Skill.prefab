@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -5329418198888724423}
   m_Layer: 0
   m_Name: Skill
-  m_TagString: Untagged
+  m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -179,6 +179,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93d1d3ea49e8244439b50f1fc82e0619, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  damage: 1
+  speed: 20
+  damage: 3
   lifetime: 2.5
