@@ -24,9 +24,6 @@ namespace fujiiYuma
         [Header("----GhostÇÃè¡Ç¶ÇÈ/ìoèÍÇ∑ÇÈspeed----")]
         [SerializeField] private float switchSpeed = 1f;
 
-        [Header("----GhostÇÃHP----")]
-        [SerializeField] private int health = 3;
-
         private float time = 0f;
 
         private bool isChangeFlag = false;
@@ -34,16 +31,25 @@ namespace fujiiYuma
         private CircleCollider2D circleCollider;
 
         private Animator animator;
-  
+
+        [SerializeField] private Camera mainCamera;
+
         private void Awake()
         {
             circleCollider = GetComponent<CircleCollider2D>();
 
             animator = GetComponent<Animator>();
+
+            if(mainCamera == null)mainCamera = Camera.main;
         }
 
         private void Update()
         {
+            if (!IsObjectInCameraView())
+            {
+                return;
+            }
+
             time += Time.deltaTime;
 
             if(time > waitTime)
@@ -122,6 +128,13 @@ namespace fujiiYuma
                     player.TakeDamage(LethalDamage);
                 }
             }
+        }
+
+        private bool IsObjectInCameraView()
+        {
+            Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
+
+            return viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0;
         }
     }
 }
