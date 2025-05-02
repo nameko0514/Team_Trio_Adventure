@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 namespace fujiiYuma
 {
-    [RequireComponent(typeof(Rigidbody2D))]
-    [RequireComponent(typeof(CircleCollider2D))]
+    [RequireComponent (typeof(Rigidbody2D))]
+    [RequireComponent (typeof(CircleCollider2D))]
     public class GhostScript : MonoBehaviour
     {
         [Header("----í«îˆÇÃë¨ìx----")]
@@ -24,16 +24,22 @@ namespace fujiiYuma
         [Header("----GhostÇÃè¡Ç¶ÇÈ/ìoèÍÇ∑ÇÈspeed----")]
         [SerializeField] private float switchSpeed = 1f;
 
+        [Header("----GhostÇÃHP----")]
+        [SerializeField] private int health = 3;
+
         private float time = 0f;
 
         private bool isChangeFlag = false;
 
         private CircleCollider2D circleCollider;
 
+        private Animator animator;
   
         private void Awake()
         {
             circleCollider = GetComponent<CircleCollider2D>();
+
+            animator = GetComponent<Animator>();
         }
 
         private void Update()
@@ -47,13 +53,15 @@ namespace fujiiYuma
                 {
                     isChangeFlag = true;
                     Debug.Log("Change.a_0");
-                    StartCoroutine(SwitchColor(1f, 0f, switchSpeed, null));
+                    StartCoroutine(SwitchColor(1f, 0.5f, switchSpeed, null));
                 }
                 else
                 {
                     isChangeFlag = false;
                     Debug.Log("Change.a_255");
-                    StartCoroutine(SwitchColor(0f, 1f, switchSpeed, null));
+                    StartCoroutine(SwitchColor(0.5f, 1f, switchSpeed, null));
+
+                    animator.SetBool("isDisappear", false);
                 }
             }
 
@@ -90,9 +98,11 @@ namespace fujiiYuma
             color.a = endAlpha;
             gameObject.GetComponent<Renderer>().material.color = color; 
             
-            if(endAlpha == 0)
+            if(endAlpha == 0.5)
             {
                 circleCollider.enabled = false;
+
+                animator.SetBool("isDisappear", true);
             }
             else
             {
