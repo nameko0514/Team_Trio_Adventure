@@ -151,6 +151,7 @@ MonoBehaviour:
   players:
   - {fileID: 1270002673}
   - {fileID: 234046055}
+  fadeImage: {fileID: 0}
 --- !u!4 &4885264
 Transform:
   m_ObjectHideFlags: 0
@@ -266,6 +267,7 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 0
+  firePos: {fileID: 0}
 --- !u!50 &234046060
 Rigidbody2D:
   serializedVersion: 5
@@ -293,7 +295,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &234046063
+--- !u!114 &234046066
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -627,6 +629,7 @@ MonoBehaviour:
   wall:
     serializedVersion: 2
     m_Bits: 0
+  firePos: {fileID: 0}
 --- !u!114 &1270002684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -733,7 +736,7 @@ MonoBehaviour:
   minDistance: 0.1
   waitTime: 10
   switchSpeed: 1
-  mainCamera: {fileID: 0}
+  mainCamera: {fileID: 949304439}
 --- !u!1001 &1563201649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1043,7 +1046,7 @@ PrefabInstance:
       addedObject: {fileID: 234046058}
     - targetCorrespondingSourceObject: {fileID: 4934127058350516537, guid: d1997d8f943c6cd4c8f52c1c5802dd2e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 234046063}
+      addedObject: {fileID: 234046066}
   m_SourcePrefab: {fileID: 100100000, guid: d1997d8f943c6cd4c8f52c1c5802dd2e, type: 3}
 --- !u!1001 &1904634996720622901
 PrefabInstance:

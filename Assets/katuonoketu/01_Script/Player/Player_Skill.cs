@@ -64,7 +64,9 @@ namespace Takato
                 for (int i = 0; i < bulletCount; i++)
                 {
                     // î≠éÀäpìxÇåvéZ
-                    float angle = -spreadAngle / 2f + (spreadAngle / (bulletcount - 1)) * i;
+                    float angle = (bulletcount > 1)
+                     ? -spreadAngle / 2f + (spreadAngle / (bulletcount - 1)) * i
+                     : 0f;
 
                     // íeÇê∂ê¨
                     GameObject bullet = Instantiate(skillEffectPrefab, firePoint.position, firePoint.rotation);
