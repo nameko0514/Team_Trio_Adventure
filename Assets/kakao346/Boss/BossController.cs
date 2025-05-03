@@ -1,6 +1,7 @@
 using UnityEngine;
 using fujiiYuma;
 using System.Collections;
+using Takato;
 
 namespace Gishi
 {
