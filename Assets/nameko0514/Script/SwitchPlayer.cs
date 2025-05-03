@@ -1,7 +1,10 @@
 using fujiiYuma;
+using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SwitchPlayer : MonoBehaviour
 {
@@ -25,8 +28,15 @@ public class SwitchPlayer : MonoBehaviour
 
     private GameObject player;
 
+    [Header("----フェードインする為のイメージ----")]
+    [SerializeField] private Image fadeImage;
+
+    private bool isSceneTrigger = true;
+
     void Start()
     {
+        isSceneTrigger = true;
+
         // 初期化: 最初のプレイヤーだけアクティブにし、残りは非アクティブ
         for (int i = 0; i < players.Length; i++)
         {
@@ -45,8 +55,10 @@ public class SwitchPlayer : MonoBehaviour
         {
             Debug.Log("ゲームオーバー");
             //Playerが全滅した時
-            //SceneManager.LoadScene("GameOverScene");
-
+            if (!isSceneTrigger) return;
+            isSceneTrigger = false;
+            if (fadeImage == null) return;
+            StartCoroutine(FadeIn(0, 1, 2, null));
             return;
         }
 
@@ -181,5 +193,26 @@ public class SwitchPlayer : MonoBehaviour
         }
 
         return allNull;
+    }
+
+    private IEnumerator FadeIn(float startAlpha, float endAlpha, float duration, Action onComplete)
+    {
+        float elapsedTime = 0f;
+        Color color = fadeImage.color;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            color.a = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
+            fadeImage.color = color;
+            yield return null;
+        }
+
+        color.a = endAlpha;
+        fadeImage.color = color;
+
+        SceneManager.LoadScene("TitleScene_00");
+
+        onComplete?.Invoke();
     }
 }
