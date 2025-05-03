@@ -737,6 +737,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9c8c2c92e6ea4448bcafd473b827280, type: 3}
+--- !u!1001 &1091780592
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2661217625201391152, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8827842009040308544, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+      propertyPath: m_Name
+      value: slime_inAnime
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
 --- !u!1001 &1109945067
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1106,6 +1163,11 @@ Transform:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3567738790638238646, guid: bbedd255ac9b51c49815fac7008cd109, type: 3}
   m_PrefabInstance: {fileID: 1343506414}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1502302796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8827842009040308544, guid: 90131336513a8d44a804e8fa0d552ed8, type: 3}
+  m_PrefabInstance: {fileID: 1091780592}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1575181684 stripped
 Transform:
@@ -1786,7 +1848,7 @@ PrefabInstance:
       objectReference: {fileID: 112456777}
     - target: {fileID: 1975329540383873527, guid: b505b9157809205409b3e71171505b5f, type: 3}
       propertyPath: players.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1975329540383873527, guid: b505b9157809205409b3e71171505b5f, type: 3}
       propertyPath: 'players.Array.data[0]'
@@ -1796,6 +1858,10 @@ PrefabInstance:
       propertyPath: 'players.Array.data[1]'
       value: 
       objectReference: {fileID: 499227659}
+    - target: {fileID: 1975329540383873527, guid: b505b9157809205409b3e71171505b5f, type: 3}
+      propertyPath: 'players.Array.data[2]'
+      value: 
+      objectReference: {fileID: 1502302796}
     - target: {fileID: 3295282866642156895, guid: b505b9157809205409b3e71171505b5f, type: 3}
       propertyPath: m_Name
       value: SwitchPlayer
@@ -1859,3 +1925,4 @@ SceneRoots:
   - {fileID: 1681739979}
   - {fileID: 1055683376}
   - {fileID: 1343506414}
+  - {fileID: 1091780592}
