@@ -39,9 +39,16 @@ namespace fujiiYuma{
         [Header("‚©‚×")]
         [SerializeField] LayerMask wall;
 
+        Animator animator;
+
+        [Header("----FirePosition----")]
+        [SerializeField] private GameObject firePos;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody2D>();
+
+            animator = GetComponent<Animator>();
         }
 
         protected virtual void Start()
@@ -126,18 +133,52 @@ namespace fujiiYuma{
         {
             if(moveInput.x >= 0.3)
             {
-                transform.localEulerAngles = Vector3.zero; 
+                transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
+                if (firePos != null) firePos.transform.localEulerAngles = new Vector3(0f, 0f, 0f);
             }else if(moveInput.x <= -0.3)
             {
-                transform.localEulerAngles = new Vector3(0,0,180);
+                transform.localScale = new Vector3(1.5f,1.5f,1.5f);
+                if (firePos != null) firePos.transform.localEulerAngles = new Vector3(0f, 0f, 180f);
             }
 
-            if(moveInput.y >= 0.3)
+            if(animator != null)
             {
-                transform.localEulerAngles = new Vector3(0, 0, 90);
-            }else if(moveInput.y <= -0.3)
-            {
-                transform.localEulerAngles = new Vector3(0, 0, 270);
+                if (moveInput.y >= 0.3)
+                {
+                    animator.SetBool("isMoveUpY", true);
+                    if (firePos != null) 
+                    {
+                        if (transform.localScale.x >= 0)
+                        {
+                            firePos.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+                        }else
+                        {
+                            firePos.transform.localEulerAngles = new Vector3(0f, 0f, 270f);
+                        }
+                        
+                    }
+                }
+                else if(moveInput.y <= -0.3)
+                {
+                    animator.SetBool("isMoveDownY", true);
+                    if (firePos != null)
+                    {
+                        if (transform.localScale.x >= 0)
+                        {
+                            firePos.transform.localEulerAngles = new Vector3(0f, 0f, 270f);
+                        }
+                        else
+                        {
+                            firePos.transform.localEulerAngles = new Vector3(0f, 0f, 90f);
+                        }
+
+                    }
+                }
+                else
+                {
+                    animator.SetBool("isMoveUpY", false);
+                    animator.SetBool("isMoveDownY", false);
+                }
             }
         }
 
