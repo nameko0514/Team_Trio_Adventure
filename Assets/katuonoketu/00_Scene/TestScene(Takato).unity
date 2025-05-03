@@ -307,6 +307,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEffectPrefab: {fileID: 5674568379601349873, guid: fa025087abae5de42a042238d16797a4, type: 3}
   firePoint: {fileID: 1889843792}
+  bulletCount: 7
+  Angle: 30
   fireRate: 3
 --- !u!1 &852138980
 GameObject:
@@ -639,28 +641,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillEffectPrefab: {fileID: 5674568379601349873, guid: fa025087abae5de42a042238d16797a4, type: 3}
   firePoint: {fileID: 852138981}
+  bulletCount: 7
+  Angle: 30
   fireRate: 3
 --- !u!1 &1498661046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1645690364605515204, guid: 3579f3847a04905458322b47ed3c6d8d, type: 3}
   m_PrefabInstance: {fileID: 1973529586781894102}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1498661047
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1498661046}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179aa95c83beddd4ca3b2cf09fd2159a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  minDistance: 0.1
-  waitTime: 10
-  switchSpeed: 1
 --- !u!58 &1498661048
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -729,6 +717,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6372262100704930112, guid: 3579f3847a04905458322b47ed3c6d8d, type: 3}
   m_PrefabInstance: {fileID: 1973529586781894102}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1498661052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1498661046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 179aa95c83beddd4ca3b2cf09fd2159a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  minDistance: 0.1
+  waitTime: 10
+  switchSpeed: 1
+  mainCamera: {fileID: 0}
 --- !u!1001 &1563201649
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -791,13 +796,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2374985370741124721, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2015065566}
-    - targetCorrespondingSourceObject: {fileID: 2374985370741124721, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 2015065570}
     - targetCorrespondingSourceObject: {fileID: 2374985370741124721, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2015065569}
+    - targetCorrespondingSourceObject: {fileID: 2374985370741124721, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2015065571}
   m_SourcePrefab: {fileID: 100100000, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
 --- !u!1 &1607890732
 GameObject:
@@ -868,24 +873,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2374985370741124721, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
   m_PrefabInstance: {fileID: 1563201649}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2015065566
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015065565}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c029f09a03819004cbdf0a290098dfc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 1
-  minDistance: 0.2
-  attackRange: 1.5
-  attackCooldown: 1
-  damage: 1
-  maxHealth: 2
 --- !u!4 &2015065568 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6823008487778128556, guid: bffb977db8b1dfd4988e848ccaa72067, type: 3}
@@ -964,6 +951,24 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &2015065571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015065565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c029f09a03819004cbdf0a290098dfc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  minDistance: 0.1
+  attackRange: 1.5
+  attackCooldown: 1
+  damage: 1
+  maxHealth: 2
 --- !u!1001 &2116158553
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1177,7 +1182,7 @@ PrefabInstance:
       addedObject: {fileID: 1498661048}
     - targetCorrespondingSourceObject: {fileID: 1645690364605515204, guid: 3579f3847a04905458322b47ed3c6d8d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1498661047}
+      addedObject: {fileID: 1498661052}
   m_SourcePrefab: {fileID: 100100000, guid: 3579f3847a04905458322b47ed3c6d8d, type: 3}
 --- !u!1001 &7523015493619024240
 PrefabInstance:
