@@ -126,6 +126,24 @@ namespace Gishi
             isGuarding = false;
             Debug.Log("ガード終了");
         }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            // プレイヤーの弾に当たったか確認
+            Takato.BulletController bullet = collision.GetComponent<Takato.BulletController>();
+            if (bullet != null)
+            {
+                // 弾のダメージを取得して、自分にダメージを与える
+                float damage = bullet.GetDamage();
+
+                TakeDamage(damage);
+
+                // 弾を削除（ボス側で破壊）
+                Destroy(bullet.gameObject);
+
+                Debug.Log("ボスが弾に当たった！ ダメージ: " + damage);
+            }
+        }
     }
 
 }

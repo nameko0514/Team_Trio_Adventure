@@ -15,6 +15,8 @@ namespace Gishi
 
         [SerializeField] private float attackRange = 7f; // 攻撃範囲
 
+        [SerializeField] private float moveSpeed = 2f; // 追尾移動速度
+
         private Transform player; // プレイヤーのTransform
 
         private float nextAttackTime; // 次の攻撃時間
@@ -35,6 +37,10 @@ namespace Gishi
 
             // プレイヤーとの距離
             float distance = Vector2.Distance(transform.position, player.position);
+
+            //追尾処理（距離に関係なく常に追いかける）
+            Vector2 directionToPlayer = (player.position - transform.position).normalized; // 方向ベクトル
+            transform.position += (Vector3)(directionToPlayer * moveSpeed * Time.deltaTime); // 蜂を移動
 
             // プレイヤーが攻撃範囲内かつ攻撃可能時間になったら攻撃
             if (distance <= attackRange && Time.time >= nextAttackTime)
