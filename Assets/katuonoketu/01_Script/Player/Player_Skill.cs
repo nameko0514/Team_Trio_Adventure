@@ -63,8 +63,8 @@ namespace Takato
 
                 for (int i = 0; i < bulletCount; i++)
                 {
-                    // ”­ŽËŠp“x‚ðŒvŽZ
-                    float angle = (bulletcount > 1)
+                     // ”­ŽËŠp“x‚ðŒvŽZ
+                     float angle = (bulletcount > 1)
                      ? -spreadAngle / 2f + (spreadAngle / (bulletcount - 1)) * i
                      : 0f;
 
