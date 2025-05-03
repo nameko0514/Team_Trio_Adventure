@@ -12,6 +12,12 @@ namespace Takato
         [Header("---FirePointをいれてね！(空のGameObject)---")]
         [SerializeField] private Transform firePoint;  // 発射位置
 
+        [Header("---弾の飛ばす数")]
+        [SerializeField] private int bulletCount; // 何発ばらまくか
+
+        [Header("---弾の飛ばす角度")]
+        [SerializeField] private float Angle; // スキルを飛ばす角度
+
         [Header("---スキルの発動間隔---")]
         [SerializeField] private float fireRate; // スキルの発動間隔
 
@@ -52,13 +58,13 @@ namespace Takato
         {
             if (skillEffectPrefab && firePoint)
             {
-                int bulletCount = 5; // 何発ばらまくか
-                float spreadAngle = 30f; // 全体で何度くらいにばらけるか
+                int bulletcount = bulletCount; // 何発ばらまくか
+                float spreadAngle = Angle; // 全体で何度くらいにばらけるか
 
                 for (int i = 0; i < bulletCount; i++)
                 {
                     // 発射角度を計算
-                    float angle = -spreadAngle / 2f + (spreadAngle / (bulletCount - 1)) * i;
+                    float angle = -spreadAngle / 2f + (spreadAngle / (bulletcount - 1)) * i;
 
                     // 弾を生成
                     GameObject bullet = Instantiate(skillEffectPrefab, firePoint.position, firePoint.rotation);
