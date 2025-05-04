@@ -80,6 +80,7 @@ namespace Gishi
         {
             // 弾をプレイヤー方向に発射
             GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+
             Vector2 direction = (player.position - transform.position).normalized;
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
