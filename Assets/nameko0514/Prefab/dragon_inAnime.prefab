@@ -213,6 +213,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2968384943961625640, guid: 5c61cde2c07cddb40982e75084cb73c8, type: 3}
   firePoint: {fileID: 334861886052532995}
   fireRate: 1
+  bulletSpeed: 15
   attackRange: 3
 --- !u!114 &-3472466470146764433
 MonoBehaviour:
@@ -231,6 +232,7 @@ MonoBehaviour:
   bulletCount: 8
   Angle: 360
   fireRate: 5
+  bulletSpeed: 15
 --- !u!1 &7249751506059344272
 GameObject:
   m_ObjectHideFlags: 0

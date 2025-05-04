@@ -239,6 +239,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2968384943961625640, guid: 5c61cde2c07cddb40982e75084cb73c8, type: 3}
   firePoint: {fileID: 2981226854684258434}
   fireRate: 1
+  bulletSpeed: 15
   attackRange: 360
 --- !u!114 &2674705534109053289
 MonoBehaviour:
@@ -257,6 +258,7 @@ MonoBehaviour:
   bulletCount: 3
   Angle: 20
   fireRate: 2
+  bulletSpeed: 15
 --- !u!70 &-1846470650620114221
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
