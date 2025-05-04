@@ -19,25 +19,33 @@ namespace Takato
 
         private float nextFireTime;
 
+        private Vector2 lastEnemyDirection;
+
         private void Update()
         {
             GameObject target = FindNearestEnemy();
 
-            if (target != null && Time.time >= nextFireTime)
+            if (target != null)
             {
-                Fire(target.transform.position);
-                nextFireTime = Time.time + 1f / fireRate;
+                // “G‚Ì•ûŒü‚ğ‹L˜^
+                Vector2 toEnemy = (target.transform.position - firePoint.position).normalized;
+                lastEnemyDirection = toEnemy;
+
+                if (Time.time >= nextFireTime)
+                {
+                    Fire(lastEnemyDirection);
+                    nextFireTime = Time.time + 1f / fireRate;
+                }
             }
         }
 
-        private void Fire(Vector3 targetPosition)
+        private void Fire(Vector2 direction)
         {
-            Vector2 direction = transform.localScale.x < 0 ? Vector2.right : Vector2.left;
-
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.linearVelocity = direction * bulletSpeed;
 
+            // ’e‚ÌŒ©‚½–Ú‚ÌŒü‚«‚ğ‡‚í‚¹‚½‚¢ê‡
             bullet.transform.right = direction;
         }
 
