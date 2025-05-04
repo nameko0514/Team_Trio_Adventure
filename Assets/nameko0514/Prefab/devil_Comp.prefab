@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6039513327996092483}
   - component: {fileID: 5762227239654623628}
   - component: {fileID: 4682969920504591312}
-  - component: {fileID: 528151814970837168}
   - component: {fileID: 5332638614530390838}
   - component: {fileID: 7971171339282473067}
+  - component: {fileID: 1481731052195128039}
   m_Layer: 0
   m_Name: devil_Comp
   m_TagString: Enemy
@@ -113,22 +113,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &528151814970837168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6522013914761071683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d03e0b0b1085c4641b32f17295cd59a1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  moveSpeed: 2
-  damage: 1
-  debuffTime: 3
 --- !u!50 &5332638614530390838
 Rigidbody2D:
   serializedVersion: 5
@@ -202,3 +186,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &1481731052195128039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6522013914761071683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5915b2682fc51d748acfc21402a55715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  moveSpeed: 2
+  damage: 1
+  debuffTime: 3
