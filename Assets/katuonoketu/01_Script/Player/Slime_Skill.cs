@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using matumoto;
 
 namespace Tkato
 {
@@ -40,7 +41,7 @@ namespace Tkato
         void Update()
         {
             // プレイヤーの向きに追従（必要に応じて）
-            firePoint.right = transform.right;
+            Vector2 direction = transform.right; // キャラクターの右方向(＝向いてる方向)に撃つ
 
             if (switchPlayer != null && switchPlayer.isTrigger)
             {
@@ -78,6 +79,9 @@ namespace Tkato
                 {
                     rb.linearVelocity = firePoint.right * bulletSpeed;
                 }
+
+                // 毎発射時にSE再生
+                SoundManager.Instance.PlaySE(SESoundData.SE.Example);
 
                 yield return new WaitForSeconds(burstInterval);
                 elapsed += burstInterval;

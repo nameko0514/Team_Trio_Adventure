@@ -1,4 +1,6 @@
+using matumoto;
 using UnityEngine;
+using static matumoto.SESoundData;
 
 namespace Takato
 {
@@ -23,7 +25,6 @@ namespace Takato
 
         [Header("---弾のスピード---")]
         [SerializeField] private float bulletSpeed; // 弾速
-
 
         private float lastFireTime = -Mathf.Infinity; // 最後のスキルの発動時間
 
@@ -61,6 +62,9 @@ namespace Takato
 
         public void UseSkill()
         {
+            // 毎発射時にSE再生
+            SoundManager.Instance.PlaySE(SESoundData.SE.None);
+
             if (skillEffectPrefab && firePoint)
             {
                 int bulletcount = bulletCount; // 何発ばらまくか

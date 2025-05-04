@@ -17,6 +17,7 @@ namespace Takato
         [Header("---UŒ‚‚ÌŠp“x”ÍˆÍ---")]
         [SerializeField] private float attackAngle; // UŒ‚‚ÌŠp“x”ÍˆÍ
 
+
         private float nextFireTime;
 
         private Vector2 lastEnemyDirection;
@@ -41,6 +42,9 @@ namespace Takato
 
         private void Fire(Vector2 direction)
         {
+            // –ˆ”­Ë‚ÉSEÄ¶
+            SoundManager.Instance.PlaySE(SESoundData.SE.None);
+
             GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             rb.linearVelocity = direction * bulletSpeed;
