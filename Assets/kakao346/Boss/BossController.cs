@@ -30,13 +30,15 @@ namespace Gishi
 
         private float lastShootTime;
 
-        private void Start()
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-        }
+        //private void Start()
+        //{
+        //    //player = GameObject.FindGameObjectWithTag("Player").transform;
+        //}
 
         private void Update()
         {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+
             // プレイヤーが存在しない場合、何もしない
             if (player == null) return;
 
