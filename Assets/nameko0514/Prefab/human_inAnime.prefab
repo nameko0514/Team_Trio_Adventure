@@ -228,6 +228,7 @@ MonoBehaviour:
   fireRate: 1
   bulletSpeed: 15
   attackRange: 5
+  attackAngle: 180
 --- !u!114 &-3887491179488153406
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -77,8 +77,8 @@ GameObject:
   - component: {fileID: 2285746464476721631}
   - component: {fileID: -1208905852285457259}
   - component: {fileID: 7765934868146338433}
-  - component: {fileID: 2674705534109053289}
   - component: {fileID: -1846470650620114221}
+  - component: {fileID: -3849448832320197957}
   m_Layer: 0
   m_Name: slime_inAnime
   m_TagString: Player
@@ -241,24 +241,7 @@ MonoBehaviour:
   fireRate: 1
   bulletSpeed: 15
   attackRange: 360
---- !u!114 &2674705534109053289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8827842009040308544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b03e47fb19bd544baf9772a43b806b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillEffectPrefab: {fileID: 5674568379601349873, guid: d0c28d4227c0909489a1c589d578b5ce, type: 3}
-  firePoint: {fileID: 2981226854684258434}
-  bulletCount: 3
-  Angle: 20
-  fireRate: 2
-  bulletSpeed: 15
+  attackAngle: 180
 --- !u!70 &-1846470650620114221
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -296,3 +279,21 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.06}
   m_Size: {x: 0.75, y: 0.5}
   m_Direction: 0
+--- !u!114 &-3849448832320197957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8827842009040308544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 117ffb01c1caebe4aaa946d228b50f40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillEffectPrefab: {fileID: 5674568379601349873, guid: d0c28d4227c0909489a1c589d578b5ce, type: 3}
+  firePoint: {fileID: 2981226854684258434}
+  fireRate: 3
+  skillDuration: 1.5
+  burstInterval: 2
+  bulletSpeed: 15
