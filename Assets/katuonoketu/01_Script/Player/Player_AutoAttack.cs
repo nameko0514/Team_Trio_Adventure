@@ -14,6 +14,9 @@ namespace Takato
         [SerializeField] private float bulletSpeed;
         [SerializeField] private float attackRange;
 
+        [Header("---攻撃の角度範囲---")]
+        [SerializeField] private float attackAngle; // 攻撃の角度範囲
+
         private float nextFireTime;
 
         private void Update()
@@ -46,13 +49,22 @@ namespace Takato
             // プレイヤーの向きに基づいて探す方向を決める
             float directionMultiplier = transform.localScale.x > 0 ? -1f : 1f;
 
+            // プレイヤーの向いている方向の角度範囲
+            float angleRange = attackAngle;  // 設定したい角度
+
             foreach (var enemy in enemies)
             {
-                // プレイヤーの向きに応じて、敵が前方にいるかどうかをチェック
-                float distance = enemy.transform.position.x - transform.position.x;
+                // プレイヤーから敵への方向ベクトルを計算
+                Vector2 toEnemy = enemy.transform.position - transform.position;
 
-                // プレイヤーが右向きなら正の方向、左向きなら負の方向に敵がいる場合にのみヒット
-                if ((directionMultiplier < 0 && distance < 0) || (directionMultiplier > 0 && distance >0))
+                // プレイヤーが向いている方向ベクトル
+                Vector2 playerDirection = transform.localScale.x > 0 ? Vector2.left : Vector2.right;
+
+                // プレイヤーの向いている方向と敵の位置ベクトルとの角度を計算
+                float angle = Vector2.Angle(playerDirection, toEnemy);
+
+                // プレイヤーの向いている方向に対して角度が範囲内であれば、発射対象にする
+                if (angle <= angleRange / 2f)
                 {
                     float dist = Vector2.Distance(transform.position, enemy.transform.position);
                     if (dist <= attackRange)
@@ -62,7 +74,6 @@ namespace Takato
                     }
                 }
             }
-
             return target;
         }
 
