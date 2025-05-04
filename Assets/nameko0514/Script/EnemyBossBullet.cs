@@ -22,6 +22,8 @@ public class EnemyBossBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    
+
     private void Start()
     {
         //弾のスピードを設定
