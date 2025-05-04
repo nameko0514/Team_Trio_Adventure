@@ -33,20 +33,20 @@ namespace fujiiYuma
         {
             mainCamera = Camera.main;
 
-            player = GameObject.FindGameObjectWithTag("Player").transform;
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
         }
 
         private void Update()
         {
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+            // プレイヤーが存在しない場合、何もしない
+            if (player == null) return;
+
             if (!IsObjectInCameraView())
             {
                 return;
             }
-
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-
-            // プレイヤーが存在しない場合、何もしない
-            if (player == null) return;
 
             PlayerRotation();
 
@@ -89,7 +89,7 @@ namespace fujiiYuma
         private void ShootProjectile()
         {
             // 弾をプレイヤー方向に発射
-            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.identity);
+            GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Quaternion.Euler(transform.rotation.x,transform.rotation.y,transform.rotation.z));
             Vector2 direction = (player.position - transform.position).normalized;
 
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
@@ -176,6 +176,18 @@ namespace fujiiYuma
 
                 Quaternion rotation = Quaternion.AngleAxis(angle,Vector3.forward);
                 transform.rotation = Quaternion.Slerp(transform.rotation,rotation,rotationSpeed * Time.deltaTime);
+            }
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                if (collision.gameObject.TryGetComponent<PlayerController>(out var player))
+                {
+                    const int LethalDamage = 1;
+                    player.TakeDamage(LethalDamage);
+                }
             }
         }
     }
