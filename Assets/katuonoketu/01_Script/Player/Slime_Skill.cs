@@ -20,6 +20,8 @@ namespace Tkato
         [SerializeField] private float skillDuration;      // スキルの持続時間（秒）
         [SerializeField] private float burstInterval;    // 弾を撃つ間隔（秒）
 
+        [Header("---弾のスピード---")]
+        [SerializeField] private float bulletSpeed; // 弾速
 
 
         private float lastFireTime = -Mathf.Infinity; // 最後のスキルの発動時間
@@ -37,10 +39,13 @@ namespace Tkato
 
         void Update()
         {
+            // プレイヤーの向きに追従（必要に応じて）
+            firePoint.right = transform.right;
+
             if (switchPlayer != null && switchPlayer.isTrigger)
             {
                 TryUseSkill();
-                switchPlayer.ResetTrigger(); // トリガーをリセットして多重発動を防ぐ
+                switchPlayer.ResetTrigger();
             }
         }
 
@@ -71,7 +76,7 @@ namespace Tkato
                 Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                 if (rb != null)
                 {
-                    rb.linearVelocity = firePoint.right * 5f;
+                    rb.linearVelocity = firePoint.right * bulletSpeed;
                 }
 
                 yield return new WaitForSeconds(burstInterval);
