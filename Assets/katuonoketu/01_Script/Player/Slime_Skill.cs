@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using matumoto;
 
 namespace Tkato
 {
@@ -78,6 +79,9 @@ namespace Tkato
                 {
                     rb.linearVelocity = firePoint.right * bulletSpeed;
                 }
+
+                // –ˆ”­Ë‚ÉSEÄ¶
+                SoundManager.Instance.PlaySE(SESoundData.SE.Example);
 
                 yield return new WaitForSeconds(burstInterval);
                 elapsed += burstInterval;
