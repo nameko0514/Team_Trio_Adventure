@@ -13,6 +13,8 @@ public class EnemyBossBullet : MonoBehaviour
 
     private Rigidbody2D rb;
 
+    private Transform player;
+
     private void Awake()
     {
         Destroy(gameObject, lifetime);
@@ -24,8 +26,13 @@ public class EnemyBossBullet : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+        if (player == null) return;
+
+        Vector2 direction = (player.position - transform.position).normalized;
         //弾のスピードを設定
-        rb.linearVelocity = transform.right * speed;
+        rb.linearVelocity = direction * speed;
     }
 
     //ダメージ処理
