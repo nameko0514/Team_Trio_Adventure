@@ -21,6 +21,9 @@ namespace Takato
         [Header("---スキルの発動間隔---")]
         [SerializeField] private float fireRate; // スキルの発動間隔
 
+        [Header("---弾のスピード---")]
+        [SerializeField] private float bulletSpeed; // 弾速
+
 
         private float lastFireTime = -Mathf.Infinity; // 最後のスキルの発動時間
 
@@ -37,6 +40,8 @@ namespace Takato
 
         void Update()
         {
+            Vector2 direction = transform.right; // キャラクターの右方向(＝向いてる方向)に撃つ
+
             if (switchPlayer != null && switchPlayer.isTrigger)
             {
                 TryUseSkill();
@@ -78,7 +83,7 @@ namespace Takato
                     Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
                     if (rb != null)
                     {
-                        rb.linearVelocity = bullet.transform.right * 5f; // 弾速（5は好きな速さにしてOK）
+                        rb.linearVelocity = bullet.transform.right * bulletSpeed; // 弾速
                     }
                 }
 

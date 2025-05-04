@@ -295,7 +295,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &234046066
+--- !u!114 &234046069
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,14 +304,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 234046055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b03e47fb19bd544baf9772a43b806b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 117ffb01c1caebe4aaa946d228b50f40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillEffectPrefab: {fileID: 5674568379601349873, guid: fa025087abae5de42a042238d16797a4, type: 3}
   firePoint: {fileID: 1889843792}
-  bulletCount: 7
-  Angle: 30
-  fireRate: 3
+  fireRate: 5
+  skillDuration: 5
+  burstInterval: 1
 --- !u!1 &852138980
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,7 +646,7 @@ MonoBehaviour:
   firePoint: {fileID: 852138981}
   bulletCount: 7
   Angle: 30
-  fireRate: 3
+  fireRate: 5
 --- !u!1 &1498661046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1645690364605515204, guid: 3579f3847a04905458322b47ed3c6d8d, type: 3}
@@ -1046,7 +1046,7 @@ PrefabInstance:
       addedObject: {fileID: 234046058}
     - targetCorrespondingSourceObject: {fileID: 4934127058350516537, guid: d1997d8f943c6cd4c8f52c1c5802dd2e, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 234046066}
+      addedObject: {fileID: 234046069}
   m_SourcePrefab: {fileID: 100100000, guid: d1997d8f943c6cd4c8f52c1c5802dd2e, type: 3}
 --- !u!1001 &1904634996720622901
 PrefabInstance:

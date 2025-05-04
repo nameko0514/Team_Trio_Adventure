@@ -24,6 +24,8 @@ public class EnemyBossBullet : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player")?.transform;
