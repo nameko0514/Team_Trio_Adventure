@@ -5,8 +5,36 @@ namespace Gishi
 {
     public class DevilController : MonoBehaviour
     {
+        [Header("ステータス")]
+        [SerializeField] private int maxHealth = 3;          // HP
+        [SerializeField] private float moveSpeed = 2f;       // スピード
         [SerializeField] private int damage = 1;  //ダメージ
         [SerializeField] private float debuffTime = 3f; //デバフ時間
+
+        private int currentHealth;                           // 現在のHP
+
+        private Transform player;                 
+
+        private Rigidbody2D rb;
+
+        private void Start()
+        {
+            currentHealth = maxHealth;
+
+            player = GameObject.FindGameObjectWithTag("Player")?.transform;
+
+            rb = GetComponent<Rigidbody2D>();
+        }
+
+        private void FixedUpdate()
+        {
+            // プレイヤーを追尾
+            if (player != null)
+            {
+                Vector2 direction = (player.position - transform.position).normalized;
+                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+            }
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -25,7 +53,24 @@ namespace Gishi
                 }
             }
         }
-       
+
+        public void TakeDamage(int damageAmount)
+        {
+            currentHealth -= damageAmount;
+            Debug.Log("Devil: ダメージを受けた！残りHP: " + currentHealth);
+
+            if (currentHealth <= 0)
+            {
+                Die(); //死亡処理
+            }
+        }
+
+        private void Die()
+        {
+            Debug.Log("Devil: 倒された！");
+            Destroy(gameObject);
+        }
+
     }
 
 }
