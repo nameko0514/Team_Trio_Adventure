@@ -40,7 +40,7 @@ namespace Tkato
         void Update()
         {
             // プレイヤーの向きに追従（必要に応じて）
-            firePoint.right = transform.right;
+            Vector2 direction = transform.right; // キャラクターの右方向(＝向いてる方向)に撃つ
 
             if (switchPlayer != null && switchPlayer.isTrigger)
             {
