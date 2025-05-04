@@ -5,8 +5,6 @@ namespace Takato
     public class BulletController : MonoBehaviour
     {
         [Tooltip("弾の処理")]
-        [Header("---弾のスピード---")]
-        [SerializeField] private float speed;
         [Header("---弾のダメージ---")]
         [SerializeField] private float damage;
         [Header("---弾のライフタイム---")]
@@ -21,12 +19,6 @@ namespace Takato
 
             //Rigitbody2Dの取得    
             rb = GetComponent<Rigidbody2D>();
-        }
-
-        private void Start()
-        {
-            //弾のスピードを設定
-            rb.linearVelocity = transform.right * speed;
         }
 
         //ダメージ処理
