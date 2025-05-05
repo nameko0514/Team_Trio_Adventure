@@ -47,7 +47,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bgmAudioSource: {fileID: -8166097641495367243}
   seAudioSource: {fileID: -8166097641495367243}
-  bgmSoundDatas: []
+  bgmSoundDatas:
+  - bgm: 1
+    audioClip: {fileID: 8300000, guid: 6c66433b6700a434c9bf52408ee167df, type: 3}
+    volume: 0.27
   seSoundDatas:
   - se: 0
     audioClip: {fileID: 8300000, guid: 26b5bd07c3c8a0f4eb11326322194be4, type: 3}
