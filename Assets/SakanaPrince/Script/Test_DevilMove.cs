@@ -119,6 +119,7 @@ namespace matumoto
             Takato.BulletController bulletController = other.GetComponent<Takato.BulletController>();
             if (bulletController != null)
             {
+                SoundManager.Instance.PlaySE(SESoundData.SE.Damage);
                 currentHealth = Mathf.Max(currentHealth - (int)bulletController.GetDamage(), 0);
                 //Debug.Log("SKEED");
 
@@ -159,6 +160,7 @@ namespace matumoto
 
         IEnumerator KnockAnime()
         {
+            SoundManager.Instance.PlaySE(SESoundData.SE.EnemyKnockOut);
             animator.SetBool("up", false);
             animator.SetBool("down", false);
             animator.SetBool("hori", false);
