@@ -119,6 +119,7 @@ namespace matumoto
             Takato.BulletController bulletController = other.GetComponent<Takato.BulletController>();
             if (bulletController != null)
             {
+                SoundManager.Instance.PlaySE(SESoundData.SE.Damage);
                 currentHealth = Mathf.Max(currentHealth - (int)bulletController.GetDamage(), 0);
                 //Debug.Log("SKEED");
 
