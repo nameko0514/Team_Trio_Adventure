@@ -36,6 +36,8 @@ public class SwitchPlayer : MonoBehaviour
 
     void Start()
     {
+        SoundManager.Instance.PlayBGM(BGMSoundData.BGM.Satge1);
+
         isSceneTrigger = true;
 
         // 初期化: 最初のプレイヤーだけアクティブにし、残りは非アクティブ
