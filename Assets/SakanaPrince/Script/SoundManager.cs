@@ -74,6 +74,11 @@ namespace matumoto
         {
             Example,
             None,
+            Human_Shot,
+            Human_Skill,
+            Damage,
+            PlayerChange,
+
         }
 
         public SE se;
