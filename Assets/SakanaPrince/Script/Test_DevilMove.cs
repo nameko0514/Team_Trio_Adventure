@@ -1,4 +1,5 @@
 using fujiiYuma;
+using System.Collections;
 using Takato;
 using UnityEngine;
 
@@ -15,6 +16,10 @@ namespace matumoto
         [SerializeField] private float debuffTime = 3f; //デバフ時間
 
         private int currentHealth;                           // 現在のHP
+
+        private bool stoperOfDobuleDead = false;
+
+        [SerializeField] bool testInstaZeroLife = false;
 
         private Transform player;
 
@@ -51,8 +56,16 @@ namespace matumoto
             // プレイヤーを追尾
             if (player != null)
             {
+                if(stoperOfDobuleDead == false)
+                {
                 Vector2 direction = (player.position - transform.position).normalized;
                 rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+
+                }
+                else
+                {
+                    moveSpeed = 0;
+                }
             }
 
             //アニメーション遷移
@@ -66,6 +79,11 @@ namespace matumoto
             else
             {
                 transform.eulerAngles = new Vector3(0, 0, 0);
+            }
+
+            if (testInstaZeroLife)
+            {
+                Die();
             }
         }
 
@@ -124,19 +142,31 @@ namespace matumoto
 
         }
 
-        public void TakeDamage(int damageAmount)
-        {
-            currentHealth -= damageAmount;
-            Debug.Log("Devil: ダメージを受けた！残りHP: " + currentHealth);
-
-           
-        }
+  
 
         private void Die()
         {
             Debug.Log("Devil: 倒された！");
+          
+
+            if (stoperOfDobuleDead == false)
+            {
+                stoperOfDobuleDead = true;
+            StartCoroutine(KnockAnime());
+            }
+         
+        }
+
+        IEnumerator KnockAnime()
+        {
+            animator.SetBool("up", false);
+            animator.SetBool("down", false);
+            animator.SetBool("hori", false);
+            animator.SetBool("knock", true);
+            yield return new WaitForSeconds(1);
             Destroy(gameObject);
         }
+
         private void SetAnime()
         {
             if (player.transform.position.x - transform.position.x >
