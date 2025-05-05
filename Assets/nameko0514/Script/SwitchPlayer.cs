@@ -1,4 +1,5 @@
 using fujiiYuma;
+using matumoto;
 using System;
 using System.Collections;
 using UnityEditor;
@@ -92,6 +93,9 @@ public class SwitchPlayer : MonoBehaviour
                 // 一定間隔（switchInterval秒）でプレイヤーを切り替え
                 if (Time.time - lastSwitchTime >= switchInterval)
                 {
+                    //ここですか
+                    SoundManager.Instance.PlaySE(SESoundData.SE.PlayerChange);//これですか
+
                     SwitchPlayers();
                     lastSwitchTime = Time.time;
                 }
