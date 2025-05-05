@@ -78,6 +78,7 @@ namespace matumoto
             Human_Skill,
             Damage,
             PlayerChange,
+            EnemyKnockOut,
 
         }
 

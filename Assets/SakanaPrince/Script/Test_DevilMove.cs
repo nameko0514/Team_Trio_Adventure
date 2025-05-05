@@ -159,6 +159,7 @@ namespace matumoto
 
         IEnumerator KnockAnime()
         {
+            SoundManager.Instance.PlaySE(SESoundData.SE.EnemyKnockOut);
             animator.SetBool("up", false);
             animator.SetBool("down", false);
             animator.SetBool("hori", false);
