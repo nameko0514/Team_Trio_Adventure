@@ -294,6 +294,6 @@ MonoBehaviour:
   skillEffectPrefab: {fileID: 5674568379601349873, guid: d0c28d4227c0909489a1c589d578b5ce, type: 3}
   firePoint: {fileID: 2981226854684258434}
   fireRate: 3
-  skillDuration: 1.5
+  skillDuration: 3
   burstInterval: 2
   bulletSpeed: 15

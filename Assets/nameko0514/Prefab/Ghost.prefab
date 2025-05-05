@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5435504297216548417}
   m_Layer: 0
   m_Name: Ghost
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -192,4 +192,4 @@ MonoBehaviour:
   minDistance: 1
   waitTime: 10
   switchSpeed: 1
-  health: 3
+  mainCamera: {fileID: 0}

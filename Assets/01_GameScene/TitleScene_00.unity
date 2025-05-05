@@ -307,7 +307,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Game TItle
+  m_Text: Rumble Trio
 --- !u!222 &19136734
 CanvasRenderer:
   m_ObjectHideFlags: 0
