@@ -33,11 +33,21 @@ namespace matumoto
         {
             currentHealth = maxHealth;
 
+        }
+
+        private void Update()
+        {
             player = GameObject.FindGameObjectWithTag("Player")?.transform;
+            
         }
 
         private void FixedUpdate()
         {
+            if(player == null)
+            {
+                return;
+            }
+
             // ƒvƒŒƒCƒ„[‚ğ’Ç”ö
             if (player != null)
             {
