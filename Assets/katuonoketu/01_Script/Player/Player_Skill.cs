@@ -63,7 +63,7 @@ namespace Takato
         public void UseSkill()
         {
             // –ˆ”­Ë‚ÉSEÄ¶
-            SoundManager.Instance.PlaySE(SESoundData.SE.None);
+            SoundManager.Instance.PlaySE(SESoundData.SE.Human_Skill);
 
             if (skillEffectPrefab && firePoint)
             {
