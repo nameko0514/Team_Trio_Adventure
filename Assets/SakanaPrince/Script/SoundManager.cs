@@ -83,6 +83,7 @@ namespace matumoto
             PlayerChange,
             EnemyKnockOut,
             GameStart,
+            Dragon_attack,
 
         }
 
