@@ -82,6 +82,7 @@ namespace matumoto
             Damage,
             PlayerChange,
             EnemyKnockOut,
+            GameStart,
 
         }
 
