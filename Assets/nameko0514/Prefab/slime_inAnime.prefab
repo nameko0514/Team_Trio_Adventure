@@ -240,7 +240,7 @@ MonoBehaviour:
   firePoint: {fileID: 2981226854684258434}
   fireRate: 1
   bulletSpeed: 15
-  attackRange: 360
+  attackRange: 5
   attackAngle: 180
 --- !u!70 &-1846470650620114221
 CapsuleCollider2D:
