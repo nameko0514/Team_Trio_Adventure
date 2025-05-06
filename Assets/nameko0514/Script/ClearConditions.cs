@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,9 +15,15 @@ namespace fujiiYuma
         [SerializeField] private GameObject enemyBoss;
         private bool isBossTrigger = true;
 
+        [SerializeField] private UnityEngine.UI.Image fadeImage;
+
+        private bool isTrigger = true;
+
         private void Awake()
         {
             isBossTrigger = true;
+
+            isTrigger = true;
 
             boxCollider = GetComponent<BoxCollider2D>();
 
@@ -31,7 +39,7 @@ namespace fujiiYuma
             {
                 if(enemyBoss == null)
                 {
-                    SceneManager.LoadScene(sceneName);
+                    StartCoroutine(FadeIn(0, 1, 2, null));
                 }
             }
         }
@@ -40,8 +48,34 @@ namespace fujiiYuma
         {
             if (collision.CompareTag("Player"))
             {
-                SceneManager.LoadScene(sceneName);
+                if (isTrigger)
+                {
+                    isTrigger = false;
+
+                    StartCoroutine(FadeIn(0, 1, 2, null));
+                }
             }
+        }
+
+        private IEnumerator FadeIn(float startAlpha, float endAlpha, float duration, Action onComplete)
+        {
+            float elapsedTime = 0f;
+            Color color = fadeImage.color;
+
+            while (elapsedTime < duration)
+            {
+                elapsedTime += Time.deltaTime;
+                color.a = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / duration);
+                fadeImage.color = color;
+                yield return null;
+            }
+
+            color.a = endAlpha;
+            fadeImage.color = color;
+
+            SceneManager.LoadScene(sceneName);
+
+            onComplete?.Invoke();
         }
     }
 }
