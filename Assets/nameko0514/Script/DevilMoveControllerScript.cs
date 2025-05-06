@@ -70,11 +70,11 @@ public class DevilMoveControllerScript : MonoBehaviour
             transform.eulerAngles = new Vector3(0, 0, 0);
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D other)
+   
+    private void OnCollisionEnter2D(Collision2D other)
     {
         //layerControllerを継承したプレイヤーに当たったか
-        PlayerController player = other.GetComponent<PlayerController>();
+        PlayerController player = other.gameObject.GetComponent<PlayerController>();
         if (player != null)
         {
             Debug.Log("Devil: プレイヤーにヒット！");
@@ -100,7 +100,7 @@ public class DevilMoveControllerScript : MonoBehaviour
 
         //}
 
-        Takato.BulletController bulletController = other.GetComponent<Takato.BulletController>();
+        Takato.BulletController bulletController = other.gameObject.GetComponent<Takato.BulletController>();
         if (bulletController != null)
         {
             currentHealth = Mathf.Max(currentHealth - (int)bulletController.GetDamage(), 0);

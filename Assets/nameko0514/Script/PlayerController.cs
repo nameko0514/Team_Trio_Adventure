@@ -184,7 +184,7 @@ namespace fujiiYuma{
 
         private void WallLineCast()
         {
-            float lineSize = 0.5f;
+            //float lineSize = 0.5f;
             float lineSizeB = 0.05f;
             rightStart = transform.position + (transform.right * 0.66f) + (transform.up * 0.3f);
             rightEnd = transform.position + (transform.right * 0.66f) - (transform.up * lineSizeB);
@@ -214,6 +214,8 @@ namespace fujiiYuma{
         public void ResetIsInvicible()
         {
             isInvicible = false;
+
+            spriteRenderer.color = originalColor;
         }
 
         private void IsWallHit()

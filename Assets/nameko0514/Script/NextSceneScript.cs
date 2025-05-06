@@ -1,3 +1,4 @@
+using matumoto;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -14,6 +15,8 @@ public class NextSceneScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            SoundManager.Instance.PlaySE(SESoundData.SE.GameStart);
+
             StartCoroutine(FadeIn(0, 1, 2, null));
         }
     }
