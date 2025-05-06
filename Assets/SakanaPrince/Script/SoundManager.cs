@@ -36,7 +36,8 @@ namespace matumoto
         {
             BGMSoundData data = bgmSoundDatas.Find(data => data.bgm == bgm);
             bgmAudioSource.clip = data.audioClip;
-            bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
+            //bgmAudioSource.volume = data.volume * bgmMasterVolume * masterVolume;
+            bgmAudioSource.volume = data.volume  * masterVolume;
             bgmAudioSource.Play();
         }
 
@@ -44,7 +45,8 @@ namespace matumoto
         public void PlaySE(SESoundData.SE se)
         {
             SESoundData data = seSoundDatas.Find(data => data.se == se);
-            seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
+            //seAudioSource.volume = data.volume * seMasterVolume * masterVolume;
+            seAudioSource.volume = data.volume * masterVolume;
             seAudioSource.PlayOneShot(data.audioClip);
         }
 
@@ -58,6 +60,7 @@ namespace matumoto
             Title,
             Satge1,
             None,
+            Stage2,
         }
 
         public BGM bgm;
@@ -79,6 +82,8 @@ namespace matumoto
             Damage,
             PlayerChange,
             EnemyKnockOut,
+            GameStart,
+            Dragon_attack,
 
         }
 

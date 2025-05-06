@@ -38,6 +38,8 @@ namespace Gishi
 
         private void OnTriggerEnter2D(Collider2D other)
         {
+
+
             //layerControllerを継承したプレイヤーに当たったか
             PlayerController player = other.GetComponent<PlayerController>();
             if (player != null)
@@ -56,6 +58,7 @@ namespace Gishi
 
         public void TakeDamage(int damageAmount)
         {
+
             currentHealth -= damageAmount;
             Debug.Log("Devil: ダメージを受けた！残りHP: " + currentHealth);
 
