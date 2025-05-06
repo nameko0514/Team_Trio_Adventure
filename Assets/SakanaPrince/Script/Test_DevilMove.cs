@@ -21,6 +21,8 @@ namespace matumoto
 
         [SerializeField] bool testInstaZeroLife = false;
 
+        [SerializeField] private Camera mainCamera;
+
         private Transform player;
 
         private Rigidbody2D rb;
@@ -31,6 +33,8 @@ namespace matumoto
             animator = GetComponent<Animator>();
 
             rb = GetComponent<Rigidbody2D>();
+
+            if (mainCamera == null) mainCamera = Camera.main;
 
         }
 
@@ -48,7 +52,12 @@ namespace matumoto
 
         private void FixedUpdate()
         {
-            if(player == null)
+            if (!IsObjectInCameraView())
+            {
+                return;
+            }
+
+            if (player == null)
             {
                 return;
             }
@@ -91,7 +100,7 @@ namespace matumoto
         {
             //layerControllerを継承したプレイヤーに当たったか
             PlayerController player = other.GetComponent<PlayerController>();
-            if (player != null)
+            if (player != null  && currentHealth > 0)
             {
                 Debug.Log("Devil: プレイヤーにヒット！");
 
@@ -119,7 +128,7 @@ namespace matumoto
             Takato.BulletController bulletController = other.GetComponent<Takato.BulletController>();
             if (bulletController != null)
             {
-                SoundManager.Instance.PlaySE(SESoundData.SE.Damage);
+              
                 currentHealth = Mathf.Max(currentHealth - (int)bulletController.GetDamage(), 0);
                 //Debug.Log("SKEED");
 
@@ -148,10 +157,10 @@ namespace matumoto
         private void Die()
         {
             Debug.Log("Devil: 倒された！");
-          
 
             if (stoperOfDobuleDead == false)
             {
+            SoundManager.Instance.PlaySE(SESoundData.SE.Damage);
                 stoperOfDobuleDead = true;
             StartCoroutine(KnockAnime());
             }
@@ -167,6 +176,13 @@ namespace matumoto
             animator.SetBool("knock", true);
             yield return new WaitForSeconds(1);
             Destroy(gameObject);
+        }
+
+        private bool IsObjectInCameraView()
+        {
+            Vector3 viewportPoint = mainCamera.WorldToViewportPoint(transform.position);
+
+            return viewportPoint.x >= 0 && viewportPoint.x <= 1 && viewportPoint.y >= 0 && viewportPoint.y <= 1 && viewportPoint.z > 0;
         }
 
         private void SetAnime()

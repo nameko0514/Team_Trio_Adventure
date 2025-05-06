@@ -1,3 +1,4 @@
+using matumoto;
 using UnityEngine;
 
 public class HitTest : MonoBehaviour
@@ -11,7 +12,7 @@ public class HitTest : MonoBehaviour
           //  currentHealth -= bulletController.GetDamage();
         }
 
-
+   
 
         if (collision.CompareTag("Respawn"))
         {
